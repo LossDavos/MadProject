@@ -9,8 +9,11 @@ def home():
 
 @app.route('/results')
 def results():
-    return render_template("inner-page.html")
+    return render_template("results.html")
 
+@app.route('/tiy')
+def tyi():
+    return render_template("tyi.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block tyi %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Play along</h2>
+          <ol>
+            <li><a href={{url_for('home')}} >Home</a></li>
+            <li>Try it yourself</li>
+          </ol>
+        </div>
+
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Experiment</h2>
+          <p>Got a hypothesis in your head or curious about a certain corelation? </p><h2>Test it and see what results you get</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-scatter-chart"></i></div>
+              <h4 class="title"><a href="">Choose parameters for linear regression</a></h4>
+              <p class="description">Our analysis makes you doubt? Prove us wrong and get your highest score</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxs-network-chart"></i></div>
+              <h4 class="title"><a href="">Correlation</a></h4>
+              <p class="description">Check for correlation between various categories</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxs-objects-vertical-bottom"></i></div>
+              <h4 class="title"><a href="">Visualise and compare</a></h4>
+              <p class="description">Compare aspects some other aspects</p>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+  </main><!-- End #main -->
+{% endblock %}
