@@ -1,20 +1,30 @@
-students <- read.csv("https://raw.githubusercontent.com/LossDavos/MadProject/main/student-mat.csv", sep=",", header=TRUE, encoding="UTF-8")
-summary(students)
+students <- read.csv("https://raw.githubusercontent.com/LossDavos/MadProject/main/student-mat.csv", sep=",", header=TRUE, encoding="UTF-8") #read table
+summary(students) 
 
 
 for (i in colnames(students)){
-  if (all(students[[i]] %in% c("yes", "no"))){
+  if (all(students[[i]] %in% c("yes", "no"))){ #transform from yes/no to 1/0 variable
     students[[i]] <- ifelse(students[[i]] == "yes", 1, 0)
   }
 }
-# students[['Walc']] = 5 - students[['Walc']] 
+# students[['Walc']] = 5 - students[['Walc']]  #in case we wanted the score 5 be the best we thusly could transform the variables
 # students[['Dalc']] = 5 - students[['Dalc']] 
 # students[['goout']] = 5 - students[['goout']] 
 
-fit2 <- lm(students$G3 ~ students$absences, data=students)
-t <- fit2$coef
-plot(students$G3, students$absences, pch=20)
-abline(coef=t, col="blue", lwd=2)
+fit <- lm(G3 ~ G1 + G2, data = students) #First simple regression model
+summary(fit)
+library(scatterplot3d)
+s3d <- scatterplot3d(students$G1, students$G2, students$G3, pch = 19, type = "p", color = "darkgrey",
+                     main = "Regression Plane", grid = TRUE, box = FALSE,  
+                    )
+
+# regression plane
+s3d$plane3d(fit, draw_polygon = TRUE, draw_lines = TRUE, 
+            polygon_args = list(col = rgb(.1, .2, .7, .5)), pch = 19) #plot regression plane
+
+
+fit2 <- lm(students$G3 ~  students$G1+students$G2 +romantic+studytime+Medu+Fedu+higher, data=students) #second model using more variables, a little higher score
+summary(fit2)
 
 # david_is_dummy <- dummy_cols(students, select_columns = c('Medu', 'Fedu'))
 # 
@@ -24,9 +34,11 @@ abline(coef=t, col="blue", lwd=2)
 # fit <- lm(david_is_dummy$G3 ~ david_is_dummy$absences
 #             , data=david_is_dummy)
 t_test_results <- list()
-cols_binary <-c("sex", "famsize",     "schoolsup",  "famsup",     "paid",       "activities", "nursery",    "higher",     "internet",   "romantic")
+cols_binary <-c("sex", "famsize",     "schoolsup",  "famsup",     "paid",       "activities", "nursery",    "higher",     "internet",   "romantic") #binary variables, which can be easily divided into two groups in t-testing
 cols_categorical <- c("Medu", "Fedu","studytime",  "failures", "famrel",    
-                      "freetime", "goout" ,     "Dalc"  ,     "Walc"      , "health"  ,   "absences")
+                      "freetime", "goout" ,     "Dalc"  ,     "Walc"      , "health"  ,   "absences") #categorical variables, which i will divide by the values above and below mean value
+
+#perform tests
 for (i in 1:10){
   result <- t.test(G3 ~ students[[cols_binary[i]]], data = students)
   t_test_results[[cols_binary[i]]] <- result
@@ -41,39 +53,40 @@ for (i in names(t_test_results)) {
   print(i)  # Print the name of the element
   print(t_test_results[[i]])  # Print the element itself
 }
-boxplot(foot_length ~ gender, data=foot, col=foot$gender)
-max <- 0
-fit_lm_model <- function(variables, w){
-  composite_variable <- rep(0,395)
-  for (i in 1:length(variables)){
-    composite_variable <- composite_variable + students[[variables[i]]] * w[i]
-  }
-  fitted <- lm(G3 ~ composite_variable
-              , data=students)
-  rsq <- summary(fitted)$r.squared
-  if (rsq > max){
-    print(rsq)
-    max <<- rsq
-  }
-  if ( rsq > 0.3){
-  print(fitted$r.squared)
-    print(variables)
-    print(weights)
-  }
-
-  t <- fitted$coef
-  
-  # plot(composite_variable, students$G3, pch=20)
-  # abline(coef=t, col="blue", lwd=2)
-}
-possible <-  c( "schoolsup",  "famsup",     "paid",  "higher",   
-               "Medu", "Fedu","studytime", "famrel",    
-               "freetime", "goout" ,     "Dalc"  ,     "Walc"      , "health")
-for (i in 1:100000){
-  si <-  sample(5:10, 1)
-fit_lm_model(sample(possible,si), sample(1:100, si)/10)
-}
-
+#males are smarter
+boxplot(G3 ~ sex, data=students, col=students$sex)
+# max <- 0
+# fit_lm_model <- function(variables, w){
+#   composite_variable <- rep(0,395)
+#   for (i in 1:length(variables)){
+#     composite_variable <- composite_variable + students[[variables[i]]] * w[i]
+#   }
+#   fitted <- lm(G3 ~ composite_variable
+#               , data=students)
+#   rsq <- summary(fitted)$r.squared
+#   if (rsq > max){
+#     print(rsq)
+#     max <<- rsq
+#   }
+#   if ( rsq > 0.3){
+#   print(fitted$r.squared)
+#     print(variables)
+#     print(weights)
+#   }
+# 
+#   t <- fitted$coef
+#   
+#   # plot(composite_variable, students$G3, pch=20)
+#   # abline(coef=t, col="blue", lwd=2)
+# }
+# possible <-  c( "schoolsup",  "famsup",     "paid",  "higher",   
+#                "Medu", "Fedu","studytime", "famrel",    
+#                "freetime", "goout" ,     "Dalc"  ,     "Walc"      , "health")
+# for (i in 1:100000){
+#   si <-  sample(5:10, 1)
+# fit_lm_model(sample(possible,si), sample(1:100, si)/10)
+# }
+#plot the correlation matrix
 library(corrplot)
 R <- cor(students[,c(7,8,14:19, 21, 24:33)])
 corrplot.mixed(R, lower = "number", lower.col = "black", upper = "ellipse", tl.pos="lt")
@@ -96,7 +109,7 @@ logistic_model <- glm(G3>=mean(G3) ~ ., data = subset_data, family = "binomial")
 summary(logistic_model)
 
 
-
+#t-test, hypothesis - how are girls' grades affected when their mother has higher education, and boys with faters and so on
 result <- t.test(students$G3 ~ students[['Medu']]>= mean(students[['Medu']]), data = students['sex'=='F'])
 print(result)
 result <- t.test(students$G3 ~ students[['Fedu']]>= mean(students[['Fedu']]), data = students['sex'=='F'])
@@ -121,3 +134,29 @@ worst_non_0 <- head(subsetik[order(subsetik$G3),],10)
 summary_worst_non_0 <- colMeans(worst_non_0[c(7,8,13:30)])
 
 print(summary_top > summary_all)
+
+library(ggplot2) #dependence of Medu and Fedu on G3 in graph
+my_graph <- ggplot(students, aes(x = Fedu, y = Medu)) +
+  geom_point(aes(color = G3)) +
+  stat_smooth(method = "lm",
+              col = "#C42126",
+              se = FALSE,
+              )
+my_graph
+
+freq <- as.data.frame(table(students$G3))
+names(freq) <- c("G3", "Frequency")
+
+# Merge frequency with the original dataset
+students <- merge(students, freq, by = "G3")
+
+# Graph if size of family matters
+ggplot(data = students, aes(x = famsize, y = G3, col = Frequency)) +
+  geom_point() +
+  facet_grid(~ sex)
+ggplot(data=students,aes(x=famsize, y=G3, col = freq))+geom_point()+facet_grid(~sex) -> g1
+
+#looking for ci su znamky normalne rozdelene
+ggplot(data=students, aes(x=G3))+ geom_bar(fill="blue")
+
+
