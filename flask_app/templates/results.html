@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block results %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Our results</h2>
+          <ol>
+            <li><a href={{url_for('home')}} >Home</a></li>
+            <li>Our results</li>
+          </ol>
+        </div>
+
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Results</h2>
+          <p>Our visualisation and analysis</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-question-mark"></i></div>
+              <h4 class="title"><a href="">Women are dumb</a></h4>
+              <p class="description">As has always been said by the wisest, by God himself blessed gender - male - they do belong in the kitchen</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-money-withdraw"></i></div>
+              <h4 class="title"><a href="">Money heist</a></h4>
+              <p class="description">Aint gonna help you make your kids grades higher - sorry m8, genetics is genetics</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-drink"></i></div>
+              <h4 class="title"><a href="">Alcoholics stay alocoholics</a></h4>
+              <p class="description">After a thorough inspection we figured out that people that drink during the weekend also drink during the workdays - maybe thats why the money aint helping</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxs-hot"></i></div>
+              <h4 class="title"><a href="">Smart chicks are just hot</a></h4>
+              <p class="description">Looks like our male audience likes to make a selection based on the academical results of the potential mating partner</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+  </main><!-- End #main -->
+{% endblock %}
