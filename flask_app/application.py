@@ -12,14 +12,9 @@ def home():
 
 @app.route('/results')
 def results():
-    df = pd.DataFrame({
-        "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-        "Amount": [4, 1, 2, 2, 4, 5],
-        "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-    })
-
-    fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
-
+    df = px.data.iris()
+    fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
+              color='species')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     header="Fruit in North America"
     description = """
