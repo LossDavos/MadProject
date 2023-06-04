@@ -14,8 +14,8 @@ for (i in colnames(students)){
 fit <- lm(G3 ~ G1 + G2, data = students) #First simple regression model
 summary(fit)
 library(scatterplot3d)
-s3d <- scatterplot3d(students$G1, students$G2, students$G3, pch = 19, type = "p", color = "darkgrey",
-                     main = "Regression Plane", grid = TRUE, box = FALSE,  
+s3d <- scatterplot3d(students$G1, students$G2, students$G3, pch = 19, type = "p", color = "darkgrey",xlab="G1",ylab="G2",zlab="G3",
+                     main = "Regression Plane", grid = TRUE, box = FALSE, angle =30 
                     )
 
 # regression plane
@@ -23,7 +23,10 @@ s3d$plane3d(fit, draw_polygon = TRUE, draw_lines = TRUE,
             polygon_args = list(col = rgb(.1, .2, .7, .5)), pch = 19) #plot regression plane
 
 
-fit2 <- lm(students$G3 ~  students$G1+students$G2 +romantic+studytime+Medu+Fedu+higher, data=students) #second model using more variables, a little higher score
+
+
+fit2 <- lm(students$G3 ~  students$G1+students$G2 +students$romantic+students$studytime+students$Medu+students$Fedu+students$higher+students$failures+ students$famrel+ students$goout+ 
+           students$Dalc+ students$Walc, data=students) #second model using more variables, a little higher score
 summary(fit2)
 
 # david_is_dummy <- dummy_cols(students, select_columns = c('Medu', 'Fedu'))
@@ -54,7 +57,9 @@ for (i in names(t_test_results)) {
   print(t_test_results[[i]])  # Print the element itself
 }
 #males are smarter
-boxplot(G3 ~ sex, data=students, col=students$sex)
+p<-ggplot(students, aes(x=sex, y=G3, fill=sex)) +
+  geom_boxplot() + ggtitle("Results of boys and girls") + theme(plot.title = element_text(hjust = 0.5))
+p
 # max <- 0
 # fit_lm_model <- function(variables, w){
 #   composite_variable <- rep(0,395)
@@ -100,10 +105,10 @@ library(glmnet)
 subset_data <- students[, c( "sex", "Medu", "Fedu",
                              "studytime", "failures",
                             "schoolsup", "famsup", "paid", "higher",
-                            "romantic", "famrel", "goout", "Dalc", "Walc", "absences","G3")]
+                            "romantic", "famrel", "goout", "Dalc", "Walc", "absences","G2", "G1","G3")]
 
 # Fit a logistic regression model
-logistic_model <- glm(G3>=mean(G3) ~ ., data = subset_data, family = "binomial")
+logistic_model <- glm(G3>=10 ~ ., data = subset_data, family = "binomial")
 
 # Print the summary of the logistic regression model
 summary(logistic_model)
@@ -141,7 +146,7 @@ my_graph <- ggplot(students, aes(x = Fedu, y = Medu)) +
   stat_smooth(method = "lm",
               col = "#C42126",
               se = FALSE,
-              )
+              )+ggtitle("Impact of parents' education") + theme(plot.title = element_text(hjust = 0.5))
 my_graph
 
 freq <- as.data.frame(table(students$G3))
@@ -152,11 +157,9 @@ students <- merge(students, freq, by = "G3")
 
 # Graph if size of family matters
 ggplot(data = students, aes(x = famsize, y = G3, col = Frequency)) +
-  geom_point() +
-  facet_grid(~ sex)
-ggplot(data=students,aes(x=famsize, y=G3, col = freq))+geom_point()+facet_grid(~sex) -> g1
+  geom_point() + ggtitle("Students' results divided by number of members in their families") + theme(plot.title = element_text(hjust = 0.5))-> g1
 
 #looking for ci su znamky normalne rozdelene
-ggplot(data=students, aes(x=G3))+ geom_bar(fill="blue")
+ggplot(data=students, aes(x=G3))+ geom_bar(fill="blue")+ ggtitle("Frequencies of the grades") + theme(plot.title = element_text(hjust = 0.5))
 
 
