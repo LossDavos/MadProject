@@ -107,33 +107,59 @@
       <div class="container">
 
         <div class="row justify-content-between">
-          <div class="col-lg-6 pt-5 pt-lg-0">
-            <h3 data-aos="fade-up">There might be something fishy going on</h3>
-            <p data-aos="fade-up" data-aos-delay="100">
-              And when he had finished speaking, he said to Simon, “Put out into the deep and let down your nets for a catch.”
-            </p>
-            <div class="row">
-              <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <i class="bx bx-receipt"></i>
-                <h4>Just keep swimming</h4>
-                <p>There is like literally 0 things that run smoothly in this dataset</p>
+          <p>
+            {% for j in range(6) %}
+              <div class="row" data-aos="fade-up">
+                {% for i in range(1,7) %}
+                <div class="col-2 ">
+                  <button class="btn btn-orange" type="button" data-toggle="collapse" data-target="#multiCollapseExample{{6*j+ i}}" aria-expanded="false" aria-controls="multiCollapseExample{{5*j + i}}">Toggle second element</button>
+                  <div class="collapse multi-collapse ml-1" id="multiCollapseExample{{6*j + i}}">
+                    <div class="card card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
               </div>
-              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bx-cube-alt"></i>
-                <h4>Haven't found a good regression let alone Nemo</h4>
-                <p>But let's blame our educational system for that</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-            <img src={{url_for('static', filename="assets/img/fis.png" )}} class="img-fluid" alt="" data-aos="zoom-in">
-          </div>
-        </div>
+            {% endfor %}
+          </p>
         
+        </div>
       </div>
     </section>
     <!-- END RESULT 1-->
+ <!-- RESULT 2-->
+ <section id="result2" class="about">
+    <div class="container">
 
+      <div class="row justify-content-between">
+        <div class="col-lg-6 pt-5 pt-lg-0">
+          <h3 data-aos="fade-up">There might be something fishy going on</h3>
+          <p data-aos="fade-up" data-aos-delay="100">
+            And when he had finished speaking, he said to Simon, “Put out into the deep and let down your nets for a catch.”
+          </p>
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-receipt"></i>
+              <h4>Just keep swimming</h4>
+              <p>There is like literally 0 things that run smoothly in this dataset</p>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-cube-alt"></i>
+              <h4>Haven't found a good regression let alone Nemo</h4>
+              <p>But let's blame our educational system for that</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
+          <img src={{url_for('static', filename="assets/img/fis.png" )}} class="img-fluid" alt="" data-aos="zoom-in">
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  <!-- END RESULT ľ-->
     <!-- RESULT 3-->
     <section id="result3" class="about">
       <div class="container">
@@ -180,10 +206,10 @@
         <div class="row justify-content-between">
 
 
-          <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-            <div id="chart" class="chart"></div>
+          <div class=" col-lg-4 d-flex align-items-center justify-content-center about-img" data-aos="zoom-in">
+            <div id="chart" class="chart "></div>
           </div>
-          <div class="col-lg-6 pt-5 pt-lg-0">
+          <div class="col-lg-6 ps-5 pt-3 ">
             <h3 data-aos="fade-up">Just kiding, you da hottest</h3>
             <p data-aos="fade-up" data-aos-delay="100">
               You absolutely rock and there's no hotter chick in your area
