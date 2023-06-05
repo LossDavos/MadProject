@@ -37,9 +37,9 @@ summary(fit2)
 # fit <- lm(david_is_dummy$G3 ~ david_is_dummy$absences
 #             , data=david_is_dummy)
 t_test_results <- list()
-cols_binary <-c("sex", "famsize",     "schoolsup",  "famsup",     "paid",       "activities", "nursery",    "higher",     "internet",   "romantic") #binary variables, which can be easily divided into two groups in t-testing
+cols_binary <-c("sex", "famsize", "school",  "Pstatus",  "address" ,   "schoolsup",  "famsup",     "paid",       "activities", "nursery",    "higher",     "internet",   "romantic") #binary variables, which can be easily divided into two groups in t-testing
 cols_categorical <- c("Medu", "Fedu","studytime",  "failures", "famrel",    
-                      "freetime", "goout" ,     "Dalc"  ,     "Walc"      , "health"  ,   "absences") #categorical variables, which i will divide by the values above and below mean value
+                      "freetime", "goout" ,   "traveltime",   "Dalc"  ,  "G1", "G2",    "Walc"      , "health"  ,   "absences") #categorical variables, which i will divide by the values above and below mean value
 
 #perform tests
 for (i in 1:10){
@@ -149,17 +149,62 @@ my_graph <- ggplot(students, aes(x = Fedu, y = Medu)) +
               )+ggtitle("Impact of parents' education") + theme(plot.title = element_text(hjust = 0.5))
 my_graph
 
-freq <- as.data.frame(table(students$G3))
-names(freq) <- c("G3", "Frequency")
+freq <- as.data.frame(table(students$G3, students$famsize))
+colnames(freq) <- c("G3", "famsize", "Frequency")
+total_students_LT3 <- sum(students$famsize == 'LE3')
+total_students_GT3 <- sum(students$famsize == 'GT3')
+
+freq$Frequency[which(freq$famsize == 'LE3')] <- freq$Frequency[which(freq$famsize == 'LE3')] / total_students_LT3
+freq$Frequency[which(freq$famsize == 'GT3')] <- freq$Frequency[which(freq$famsize == 'GT3')] / total_students_GT3
 
 # Merge frequency with the original dataset
-students <- merge(students, freq, by = "G3")
+students <- merge(students, freq, by = c("G3", "famsize"))
 
 # Graph if size of family matters
 ggplot(data = students, aes(x = famsize, y = G3, col = Frequency)) +
-  geom_point() + ggtitle("Students' results divided by number of members in their families") + theme(plot.title = element_text(hjust = 0.5))-> g1
+  geom_point(size = 7) + ggtitle("Students' results divided by number of members in their families") + theme(plot.title = element_text(hjust = 0.5))-> g1
+
+
 
 #looking for ci su znamky normalne rozdelene
 ggplot(data=students, aes(x=G3))+ geom_bar(fill="blue")+ ggtitle("Frequencies of the grades") + theme(plot.title = element_text(hjust = 0.5))
 
 
+write.csv(students, "students.csv")
+
+
+results_df <- data.frame(Test = character(),
+                         Estimate = numeric(),
+                         Statistic = numeric(),
+                         p_value = numeric(),
+                         stringsAsFactors = FALSE)
+
+# Iterate over the list of t-test results
+for (test_name in names(t_test_results)) {
+  # Extract relevant information from each t-test result
+  test_result <- t_test_results[[test_name]]
+  test_estimate <- test_result$estimate
+  test_statistic <- test_result$statistic
+  test_p_value <- test_result$p.value
+  
+  # Add the information to the data frame
+  results_df <- rbind(results_df, data.frame(Test = test_name,
+                                             Estimate = test_estimate,
+                                             Statistic = test_statistic,
+                                             p_value = test_p_value,
+                                             stringsAsFactors = FALSE))
+}
+
+rownames(results_df) <- NULL
+
+write.csv(results_df, "ttests.csv", row.names=FALSE)
+
+library(RSQLite)
+con <- dbConnect(SQLite(), "students.db")
+
+# Create a table in the database
+dbWriteTable(con, "student_data", students, overwrite = TRUE)
+dbWriteTable(con, "t_tests", results_df, overwrite = TRUE)
+
+# Disconnect from the database
+dbDisconnect(con)
