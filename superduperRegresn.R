@@ -173,13 +173,9 @@ ggplot(data=students, aes(x=G3))+ geom_bar(fill="blue")+ ggtitle("Frequencies of
 write.csv(students, "students.csv")
 
 
-results_df <- data.frame(Test = character(),
-                         Estimate = numeric(),
-                         Statistic = numeric(),
-                         p_value = numeric(),
-                         stringsAsFactors = FALSE)
+results_df <- data.frame(stringsAsFactors = FALSE)
 
-# Iterate over the list of t-test results
+# Iterate over each t-test result
 for (test_name in names(t_test_results)) {
   # Extract relevant information from each t-test result
   test_result <- t_test_results[[test_name]]
@@ -187,17 +183,30 @@ for (test_name in names(t_test_results)) {
   test_statistic <- test_result$statistic
   test_p_value <- test_result$p.value
   
+  # Extract group names
+  group_names <- names(test_estimate)
+  if (identical(group_names,c("mean in group 0", "mean in group 1"))){
+    group_names <- c("mean in group FALSE", "mean in group TRUE")
+  }
+  
   # Add the information to the data frame
   results_df <- rbind(results_df, data.frame(Test = test_name,
-                                             Estimate = test_estimate,
-                                             Statistic = test_statistic,
                                              p_value = test_p_value,
+                                             Group1 = group_names[1],
+                                             Estimate1 = test_estimate[1],
+                                             Group2 = group_names[2],
+                                             Estimate2 = test_estimate[2],
+                                             Statistic = test_statistic,
                                              stringsAsFactors = FALSE))
 }
+
+# Remove the empty row
 
 rownames(results_df) <- NULL
 
 write.csv(results_df, "ttests.csv", row.names=FALSE)
+results_df[, c(2,4,6,7)] <- round(results_df[, c(2,4,6,7)], 4)
+
 
 library(RSQLite)
 con <- dbConnect(SQLite(), "students.db")
