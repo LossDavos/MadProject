@@ -3,6 +3,45 @@
 {% block results %}
 
   <main id="main">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var pointsData = [['Points', 'Count']];
+    var pointMap = new Map([
+      {% for point in points %}
+        [{{ point[0] }}, {{ point[1] }}],
+      {% endfor %}
+    ]);
+
+    for (var i = 0; i <= 20; i++) {
+      var count = pointMap.has(i) ? pointMap.get(i) : 0;
+      pointsData.push([i, count]);
+    }
+
+    var data = google.visualization.arrayToDataTable(pointsData);
+
+    var options = {
+      title: 'Distribution of the different grades in the G3 test',
+      legend: { position: 'none' },
+      viewWindow: {
+          min: -1,
+          max: 20.5
+        },
+      hAxis: {
+        title: 'Points',
+      },
+      vAxis: {
+        title: 'Count',
+      }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
 
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
@@ -199,6 +238,8 @@
 
     <!-- RESULT 4-->
     <section id="result4" class="about">
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
       <div class="container">
 
         <div class="row justify-content-between">
