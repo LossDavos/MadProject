@@ -53,10 +53,10 @@ def results():
     # create a "cursor" for working with the database
     cursor = connection.cursor()
     
-    info_cat =cur.execute("""SELECT Test, Estimate, Statistic, p_value FROM t_tests""") 
+    cursor.execute("""SELECT Test, Estimate, Statistic, p_value FROM t_tests""") 
 
     points = cur.execute("SELECT G3, COUNT(*) AS group_size FROM student_data GROUP BY G3").fetchall()
-    return render_template('results.html', graphJSON=graphJSON, header=header,description=description, points = points, info_cat=info_cat)
+    return render_template('results.html', graphJSON=graphJSON, header=header,description=description, points = points, info_cat=cursor.fetchall())
 
     # return render_template("results.html")
 
