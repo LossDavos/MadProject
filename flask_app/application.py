@@ -5,6 +5,8 @@ import pandas as pd
 import plotly
 import plotly.express as px
 import plotly.graph_objects as go
+import sqlite3
+
 app = Flask(__name__)
 
 
@@ -30,7 +32,16 @@ def results():
     A academic study of the number of apples, oranges and bananas in the cities of
     San Francisco and Montreal would probably not come up with this chart.
     """
-    return render_template('results.html', graphJSON=graphJSON, header=header,description=description)
+
+    #information about the individual categories
+    # connect to a database 
+    connection = sqlite3.connect('students.db')
+    # create a "cursor" for working with the database
+    cursor = connection.cursor()
+    cursor.execute("""SELECT Test, Estimate, Statistic, p_value FROM t_tests
+       """)
+
+    return render_template('results.html', graphJSON=graphJSON, header=header,description=description, info_cat=cursor.fetchall())
 
     # return render_template("results.html")
 
