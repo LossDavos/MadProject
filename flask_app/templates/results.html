@@ -197,12 +197,19 @@
               <p>Some general statistics</p>
               
             </div>
-            <div class="row about">
+            <div class="row about team">
               <div class="col-6" data-aos="fade-up" data-aos-delay="100">
                 <i class='bx bx-male-female'></i>
                 <h4>Girls vs Boys</h4>
-                <p></p>
+                <div class="member">
                   <img src={{url_for('static', filename="assets/graphs/boysVSgirls.png" )}} class="img-fluid " style="width: 700px; height: 400px;" data-aos="zoom-in" >
+                  <div class="member-info">
+                    <div class="member-info-content">
+                      <h4>Comparison of results based on gender</h4>
+                      <span>Male students seem to have slightly better results than female students</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
                 <i class='bx bx-analyse'></i>
@@ -211,20 +218,33 @@
                 <div id="chart_div" class="col-12" style="width: 900px; height: 500px; margin-top:-50px;"  data-aos="zoom-in"></div>
               </div>
             </div>
-            <div class="row about justify-content-center">
-              <div class="col-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="row about team justify-content-center">
+              <div class="col-6" data-aos="fade-up" data-aos-delay="100">
                 <i class='bx bx-brain' ></i>
                 <h4>Parents' education impact</h4>
-                <p></p>
-                <img src={{url_for('static', filename="assets/graphs/parents_education.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" data-aos="zoom-in">
+                <div class="member">
+                  <img src={{url_for('static', filename="assets/graphs/parents_education.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" data-aos="zoom-in">
+                  <div class="member-info">
+                    <div class="member-info-content">
+                      <h4>Impact of parent's education on academical results</h4>
+                      <span>Whatever that line is supposed to mean it's going up so i guess its good</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              
-              <div class="col-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-6" data-aos="fade-up" data-aos-delay="100">
                 <i class='bx bx-home' ></i>
                 <h4>Family size impact</h4>
-                <p></p>
-                <img src={{url_for('static', filename="assets/graphs/sizeOfFamily.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" data-aos="zoom-in">
+                <div class="member">
+                  <img src={{url_for('static', filename="assets/graphs/sizeOfFamily.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" data-aos="zoom-in">
+                  <div class="member-info">
+                    <div class="member-info-content">
+                      <h4>Impact on family size on academical results</h4>
+                      <span>Does not matter</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
