@@ -36,10 +36,10 @@
     var worstValue = worst.get(selectedValue);
       var data = google.visualization.arrayToDataTable([
         ['Group', 'Mean', { role: 'style' }],
-        ['TOP', topValue, '#b87333'],
-        ['ALL', allValue, 'silver'],
-        ['WORST0', worst0Value, 'gold'],
-        ['WORST', worstValue, 'blue']
+        ['Students with more than 17 points from G3', topValue, '#003049'],
+        ['All students', allValue, '#f77f00'],
+        ['Students with 0 points from G3', worst0Value, '#fcbf49'],
+        ['Worst students from G3 (zero excluded)', worstValue, '#eae2b7']
       ]);
     
       var view = new google.visualization.DataView(data);
@@ -51,7 +51,7 @@
       }, 2]);
 
       var options = {
-        title: 'Means of the given variable in specific groups',
+        title: 'Means of a given variable in the specific groups',
         width: 600,
         height: 400,
         bar: { groupWidth: '95%' },
@@ -284,29 +284,28 @@
       </div>
       <div>
     <select id="selectOption" onchange="generateChart()">
-      <option value="nic">-</option>
-      <option value="Medu">Medu</option>
-      <option value="Fedu">Fedu</option>
-      <option value="traveltime">traveltime</option>
-      <option value="studytime">studytime</option>
-      <option value="failures">failures</option>
-      <option value="schoolsup">schoolsup</option>
-      <option value="famsup">famsup</option>
-      <option value="paid">paid</option>
-      <option value="activities">activities</option>
-      <option value="nursery">nursery</option>
-      <option value="higher">higher</option>
-      <option value="internet">internet</option>
-      <option value="romantic">romantic</option>
-      <option value="famrel">famrel</option>
-      <option value="freetime">freetime</option>
-      <option value="goout">goout</option>
-      <option value="Dalc">Dalc</option>
-      <option value="Walc">Walc</option>
-      <option value="health">health</option>
-      <option value="absences">absences</option>
-      <option value="G1">G1</option>
-      <option value="G2">G2</option>
+      <option value="Medu">Mother's education | 0 worst - 4 best</option>
+      <option value="Fedu">Father's education | 0 worst - 4 best</option>
+      <option value="traveltime">Traveltime | 1 shortest - 4 longest</option>
+      <option value="studytime">Studytime | 1 shortest - 4 longest</option>
+      <option value="failures">Past failures | 0 to 3</option>
+      <option value="schoolsup">Extra educational support | FALSE/TRUE</option>
+      <option value="famsup">Family educational support | FALSE/TRUE</option>
+      <option value="paid">Paid lessons | FALSE/TRUE</option>
+      <option value="activities"> Extra-curricular activities | FALSE/TRUE</option>
+      <option value="nursery">Attended nursery | FALSE/TRUE</option>
+      <option value="higher">Ambitions to take higher education | FALSE/TRUE</option>
+      <option value="internet">Internet access at home | FALSE/TRUE</option>
+      <option value="romantic">In a relationship | FALSE/TRUE</option>
+      <option value="famrel">Quality of family relationships | 1 worst - 5 best</option>
+      <option value="freetime">Freetime | 1 very low - 5 very high</option>
+      <option value="goout">Going out with friends | 1 very low - 5 very high</option>
+      <option value="Dalc">Workday alcohol consumption | 1 very low - 5 very high</option>
+      <option value="Walc">Weekend alcohol consumption | 1 very low - 5 very high</option>
+      <option value="health">Current health status | 1 worst - 5 best</option>
+      <option value="absences">Number of school absences| 0 to 93</option>
+      <option value="G1">G1 score | 0 to 20</option>
+      <option value="G2">G2 score | 0 to 20</option>
     </select>
   </div>
       <div id="barchart_values" style="width: 900px; height: 300px;"></div>
