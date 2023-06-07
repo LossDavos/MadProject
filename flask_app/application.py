@@ -56,7 +56,95 @@ def results():
     cursor.execute("""SELECT Test, Group1, Group2, Estimate1, Estimate2, Statistic, p_value FROM t_tests""") 
 
     points = cur.execute("SELECT G3, COUNT(*) AS group_size FROM student_data GROUP BY G3").fetchall()
-    return render_template('results.html', graphJSON=graphJSON, header=header,description=description, points = points, info_cat=cursor.fetchall())
+    najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
+       AVG(failures) AS mean_failures,
+       AVG(schoolsup) AS mean_schoolsup,
+       AVG(famsup) AS mean_famsup,
+       AVG(paid) AS mean_paid,
+       AVG(activities) AS mean_activities,
+       AVG(nursery) AS mean_nursery,
+       AVG(higher) AS mean_higher,
+       AVG(internet) AS mean_internet,
+       AVG(romantic) AS mean_romantic,
+       AVG(famrel) AS mean_famrel,
+       AVG(freetime) AS mean_freetime,
+       AVG(goout) AS mean_goout,
+       AVG(Dalc) AS mean_Dalc,
+       AVG(Walc) AS mean_Walc,
+       AVG(health) AS mean_health,
+       AVG(absences) AS mean_absences,
+       AVG(G1) AS mean_G1,
+       AVG(G2) AS mean_G2
+FROM student_data WHERE G3>17;
+""").fetchall()
+ 
+    vsetci = top_najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
+       AVG(failures) AS mean_failures,
+       AVG(schoolsup) AS mean_schoolsup,
+       AVG(famsup) AS mean_famsup,
+       AVG(paid) AS mean_paid,
+       AVG(activities) AS mean_activities,
+       AVG(nursery) AS mean_nursery,
+       AVG(higher) AS mean_higher,
+       AVG(internet) AS mean_internet,
+       AVG(romantic) AS mean_romantic,
+       AVG(famrel) AS mean_famrel,
+       AVG(freetime) AS mean_freetime,
+       AVG(goout) AS mean_goout,
+       AVG(Dalc) AS mean_Dalc,
+       AVG(Walc) AS mean_Walc,
+       AVG(health) AS mean_health,
+       AVG(absences) AS mean_absences,
+       AVG(G1) AS mean_G1,
+       AVG(G2) AS mean_G2
+FROM student_data;
+""").fetchall()
+    najhorsi_0 = top_najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
+       AVG(failures) AS mean_failures,
+       AVG(schoolsup) AS mean_schoolsup,
+       AVG(famsup) AS mean_famsup,
+       AVG(paid) AS mean_paid,
+       AVG(activities) AS mean_activities,
+       AVG(nursery) AS mean_nursery,
+       AVG(higher) AS mean_higher,
+       AVG(internet) AS mean_internet,
+       AVG(romantic) AS mean_romantic,
+       AVG(famrel) AS mean_famrel,
+       AVG(freetime) AS mean_freetime,
+       AVG(goout) AS mean_goout,
+       AVG(Dalc) AS mean_Dalc,
+       AVG(Walc) AS mean_Walc,
+       AVG(health) AS mean_health,
+       AVG(absences) AS mean_absences,
+       AVG(G1) AS mean_G1,
+       AVG(G2) AS mean_G2
+FROM student_data WHERE G3=0;
+""").fetchall()
+    najhorsi_nie_0 = top_najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
+       AVG(failures) AS mean_failures,
+       AVG(schoolsup) AS mean_schoolsup,
+       AVG(famsup) AS mean_famsup,
+       AVG(paid) AS mean_paid,
+       AVG(activities) AS mean_activities,
+       AVG(nursery) AS mean_nursery,
+       AVG(higher) AS mean_higher,
+       AVG(internet) AS mean_internet,
+       AVG(romantic) AS mean_romantic,
+       AVG(famrel) AS mean_famrel,
+       AVG(freetime) AS mean_freetime,
+       AVG(goout) AS mean_goout,
+       AVG(Dalc) AS mean_Dalc,
+       AVG(Walc) AS mean_Walc,
+       AVG(health) AS mean_health,
+       AVG(absences) AS mean_absences,
+       AVG(G1) AS mean_G1,
+       AVG(G2) AS mean_G2
+FROM student_data WHERE (G3 >= 4 AND G3 <= 6);
+""").fetchall()
+    options = ["Medu", "Fedu", "traveltime", "studytime", "failures", "schoolsup", "famsup", "paid", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "absences", "G1", "G2"]
+
+    return render_template('results.html', graphJSON=graphJSON, header=header,description=description, points = points, info_cat=cursor.fetchall(),
+                           najlepsi = najlepsi, vsetci = vsetci, najhorsi_0 = najhorsi_0, najhorsi_nie_0 = najhorsi_nie_0, options = options)
 
     # return render_template("results.html")
 
