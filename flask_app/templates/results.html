@@ -3,6 +3,66 @@
 {% block results %}
 
   <main id="main">
+  
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  var topka = new Map([
+    {% for point in najlepsi %}
+    ["{{options[loop.index0]}}", {{ point }}],
+  {% endfor %}
+  ]);
+  var vsetci = new Map([
+    {% for point in vsetci %}
+    ["{{options[loop.index0]}}", {{ point }}],
+  {% endfor %}
+  ]);
+  var worst0 = new Map([
+    {% for point in najhorsi_0 %}
+    ["{{options[loop.index0]}}", {{ point }}],
+  {% endfor %}
+  ]);
+  var worst = new Map([
+   {% for point in najhorsi_nie_0 %}
+    ["{{options[loop.index0]}}", {{ point }}],
+  {% endfor %}
+  ]);
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    function generateChart() {
+     var selectedValue = document.getElementById("selectOption").value;
+    var topValue = topka.get(selectedValue);
+    var allValue = vsetci.get(selectedValue);
+    var worst0Value = worst0.get(selectedValue);
+    var worstValue = worst.get(selectedValue);
+      var data = google.visualization.arrayToDataTable([
+        ['Group', 'Mean', { role: 'style' }],
+        ['TOP', topValue, '#b87333'],
+        ['ALL', allValue, 'silver'],
+        ['WORST0', worst0Value, 'gold'],
+        ['WORST', worstValue, 'blue']
+      ]);
+    
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1, {
+        calc: 'stringify',
+        sourceColumn: 1,
+        type: 'string',
+        role: 'annotation'
+      }, 2]);
+
+      var options = {
+        title: 'Means of the given variable in specific groups',
+        width: 600,
+        height: 400,
+        bar: { groupWidth: '95%' },
+        legend: { position: 'none' },
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
+      chart.draw(view, options);
+    }
+    google.charts.setOnLoadCallback(generateChart);
+    </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load("current", { packages: ["corechart"] });
@@ -103,6 +163,7 @@
                 <p class="description">Looks like our male audience likes to make a selection based on the academical results of the potential mating partner</p>
               </div>
             </a>
+        
             </div>
         </div>
 
@@ -215,7 +276,34 @@
           <img src={{url_for('static', filename="assets/img/fis.png" )}} class="img-fluid" alt="" data-aos="zoom-in">
         </div>
       </div>
-      
+      <div>
+    <select id="selectOption" onchange="generateChart()">
+      <option value="nic">-</option>
+      <option value="Medu">Medu</option>
+      <option value="Fedu">Fedu</option>
+      <option value="traveltime">traveltime</option>
+      <option value="studytime">studytime</option>
+      <option value="failures">failures</option>
+      <option value="schoolsup">schoolsup</option>
+      <option value="famsup">famsup</option>
+      <option value="paid">paid</option>
+      <option value="activities">activities</option>
+      <option value="nursery">nursery</option>
+      <option value="higher">higher</option>
+      <option value="internet">internet</option>
+      <option value="romantic">romantic</option>
+      <option value="famrel">famrel</option>
+      <option value="freetime">freetime</option>
+      <option value="goout">goout</option>
+      <option value="Dalc">Dalc</option>
+      <option value="Walc">Walc</option>
+      <option value="health">health</option>
+      <option value="absences">absences</option>
+      <option value="G1">G1</option>
+      <option value="G2">G2</option>
+    </select>
+  </div>
+      <div id="barchart_values" style="width: 900px; height: 300px;"></div>
     </div>
   </section>
   <!-- END RESULT ľ-->

@@ -127,16 +127,16 @@ print(result)
 
 ##TOP 10 BEST
 subs <- head(students[order(students$G3, decreasing=TRUE),],10)
-summary_all <- colMeans(students[c(7,8,13:30)])
-summary_top <- colMeans(subs[c(7,8,13:30)])
+summary_all <- colMeans(students[c(1,8,9,14:33)])
+summary_top <- colMeans(subs[c(1,8,9,14:33)])
 
 # worst_0 <- head(students[order(students$G3),],10)
 worst_0 <- students[students$G3==0,]
-summary_worst <- colMeans(worst_0[c(7,8,13:30)])
+summary_worst <- colMeans(worst_0[c(1,8,9,14:33)])
 
 subsetik <- students[students$G3>0,][]
 worst_non_0 <- head(subsetik[order(subsetik$G3),],10)
-summary_worst_non_0 <- colMeans(worst_non_0[c(7,8,13:30)])
+summary_worst_non_0 <- colMeans(worst_non_0[c(1,8,9,14:33)])
 
 print(summary_top > summary_all)
 
