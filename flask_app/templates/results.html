@@ -3,14 +3,13 @@
 {% block results %}
 
   <main id="main">
-<<<<<<< HEAD
   
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
   var topka = new Map([
     {% for point in najlepsi %}
-    ["{{options[loop.index0]}}", {{ point }}],
-  {% endfor %}
+      ["{{options[loop.index0]}}", {{ point }}],
+    {% endfor %}
   ]);
   var vsetci = new Map([
     {% for point in vsetci %}
@@ -103,9 +102,7 @@
     chart.draw(data, options);
   }
 </script>
-=======
-    
->>>>>>> 9f4f624dd9db93dd9815e0b11a0907f8fb5af0ee
+
 
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
@@ -259,7 +256,7 @@
     </section>
     <!-- END RESULT 1-->
  <!-- RESULT 2-->
- <!-- <section id="result2" class="about section-bg">
+<section id="result2" class="about section-bg">
     <div class="container">
 
       <div class="row justify-content-between">
@@ -314,7 +311,7 @@
   </div>
       <div id="barchart_values" style="width: 900px; height: 300px;"></div>
     </div>
-  </section> -->
+  </section>
   <!-- END RESULT ľ-->
     <!-- RESULT 3-->
     <section id="result3" class="services">

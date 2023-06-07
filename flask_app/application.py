@@ -55,7 +55,7 @@ def results():
     
     cursor.execute("""SELECT Test, Group1, Group2, Estimate1, Estimate2, Statistic, p_value FROM t_tests""") 
 
-    points = cur.execute("SELECT G3, COUNT(*) AS group_size FROM student_data GROUP BY G3").fetchall()
+    points = cur.execute("SELECT G3, COUNT(*) AS group_size FROM student_data GROUP BY G3").fetchall()[0]
     najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
        AVG(failures) AS mean_failures,
        AVG(schoolsup) AS mean_schoolsup,
@@ -76,7 +76,7 @@ def results():
        AVG(G1) AS mean_G1,
        AVG(G2) AS mean_G2
 FROM student_data WHERE G3>17;
-""").fetchall()
+""").fetchall()[0]
  
     vsetci = top_najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
        AVG(failures) AS mean_failures,
@@ -98,7 +98,7 @@ FROM student_data WHERE G3>17;
        AVG(G1) AS mean_G1,
        AVG(G2) AS mean_G2
 FROM student_data;
-""").fetchall()
+""").fetchall()[0]
     najhorsi_0 = top_najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
        AVG(failures) AS mean_failures,
        AVG(schoolsup) AS mean_schoolsup,
@@ -119,7 +119,7 @@ FROM student_data;
        AVG(G1) AS mean_G1,
        AVG(G2) AS mean_G2
 FROM student_data WHERE G3=0;
-""").fetchall()
+""").fetchall()[0]
     najhorsi_nie_0 = top_najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
        AVG(failures) AS mean_failures,
        AVG(schoolsup) AS mean_schoolsup,
@@ -140,9 +140,8 @@ FROM student_data WHERE G3=0;
        AVG(G1) AS mean_G1,
        AVG(G2) AS mean_G2
 FROM student_data WHERE (G3 >= 4 AND G3 <= 6);
-""").fetchall()
+""").fetchall()[0]
     options = ["Medu", "Fedu", "traveltime", "studytime", "failures", "schoolsup", "famsup", "paid", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "absences", "G1", "G2"]
-
     return render_template('results.html', graphJSON=graphJSON, header=header,description=description, points = points, info_cat=cursor.fetchall(),
                            najlepsi = najlepsi, vsetci = vsetci, najhorsi_0 = najhorsi_0, najhorsi_nie_0 = najhorsi_nie_0, options = options)
 
