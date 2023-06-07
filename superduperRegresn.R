@@ -11,6 +11,14 @@ for (i in colnames(students)){
 # students[['Dalc']] = 5 - students[['Dalc']] 
 # students[['goout']] = 5 - students[['goout']] 
 
+
+age_counts <- students %>%
+  group_by(age) %>%
+  summarize(count = n())
+
+
+
+
 fit <- lm(G3 ~ G1 + G2, data = students) #First simple regression model
 summary(fit)
 library(scatterplot3d)
