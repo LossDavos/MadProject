@@ -197,14 +197,14 @@
               <p>Some general statistics</p>
               
             </div>
-            <div class="row about team">
+            <div class="row about team py-0">
               <div class="col-6" data-aos="fade-up" data-aos-delay="100">
                 <i class='bx bx-male-female'></i>
                 <h4>Girls vs Boys</h4>
-                <div class="member">
-                  <img src={{url_for('static', filename="assets/graphs/boysVSgirls.png" )}} class="img-fluid " style="width: 700px; height: 400px;" data-aos="zoom-in" >
+                <div class="member ">
+                  <img src={{url_for('static', filename="assets/graphs/boysVSgirls.png" )}} class="img-fluid " style="width: 700px; height: 400px;" >
                   <div class="member-info">
-                    <div class="member-info-content">
+                    <div class="member-info-content text-right  pe-2">
                       <h4>Comparison of results based on gender</h4>
                       <span>Male students seem to have slightly better results than female students</span>
                     </div>
@@ -212,20 +212,20 @@
                 </div>
               </div>
               <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
-                <i class='bx bx-analyse'></i>
+                <i class='bx bx-analyse' style="position: relative;z-index: 1;"></i>
                 <h4 style="position: relative;z-index: 1;">Distribution of marks</h4>
-                <p></p>
-                <div id="chart_div" class="col-12" style="width: 900px; height: 500px; margin-top:-50px;"  data-aos="zoom-in"></div>
+                <p style="font-size: .9em ;position: relative;z-index: 1;">Appears to be normal</p>
+                <div id="chart_div" class="col-12" style="width: 1100px; height: 500px; margin-top:-100px;"  data-aos="zoom-in"></div>
               </div>
             </div>
-            <div class="row about team justify-content-center">
+            <div class="row about team pt-0 justify-content-center">
               <div class="col-6" data-aos="fade-up" data-aos-delay="100">
                 <i class='bx bx-brain' ></i>
                 <h4>Parents' education impact</h4>
                 <div class="member">
-                  <img src={{url_for('static', filename="assets/graphs/parents_education.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" data-aos="zoom-in">
+                  <img src={{url_for('static', filename="assets/graphs/parents_education.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" >
                   <div class="member-info">
-                    <div class="member-info-content">
+                    <div class="member-info-content text-right  pe-2">
                       <h4>Impact of parent's education on academical results</h4>
                       <span>Whatever that line is supposed to mean it's going up so i guess its good</span>
                     </div>
@@ -237,9 +237,9 @@
                 <i class='bx bx-home' ></i>
                 <h4>Family size impact</h4>
                 <div class="member">
-                  <img src={{url_for('static', filename="assets/graphs/sizeOfFamily.png" )}} class="img-fluid"  style="width: 700px; height: 400px;" data-aos="zoom-in">
+                  <img src={{url_for('static', filename="assets/graphs/sizeOfFamily.png" )}} class="img-fluid"  style="width: 700px; height: 400px;">
                   <div class="member-info">
-                    <div class="member-info-content">
+                    <div class="member-info-content text-right pe-2">
                       <h4>Impact on family size on academical results</h4>
                       <span>Does not matter</span>
                     </div>
@@ -266,9 +266,9 @@
             <div id="chart" class="chart "></div>
           </div>
           <div class="col-lg-6 ps-5 pt-3 ">
-            <h3 data-aos="fade-up">Just kiding, you da hottest</h3>
+            <h3 data-aos="fade-up">Oh-oh, that's what makes you succesful!</h3>
             <p data-aos="fade-up" data-aos-delay="100">
-              You absolutely rock and there's no hotter chick in your area
+              How various categories impact students' results and overall academical work
             </p>
             <div class="row">
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
@@ -324,7 +324,6 @@
     var data = google.visualization.arrayToDataTable(pointsData);
 
     var options = {
-      title: 'Distribution of the different grades in the G3 test',
       legend: { position: 'none' },
       viewWindow: {
           min: -1,
@@ -332,9 +331,12 @@
         },
       hAxis: {
         title: 'Points',
+        baselineColor: 'none',
+        // ticks: []
       },
       vAxis: {
         title: 'Count',
+
       }
     };
 
