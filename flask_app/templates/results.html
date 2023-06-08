@@ -184,7 +184,7 @@
   </section><!-- End Breadcrumbs Section -->
 
   <!-- RESULTS MENU -->
-  <section id="services" class="services section-bg">
+  <section id="services" class="services">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
@@ -233,13 +233,13 @@
             </div>
             </a>
           </div>
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="500">
             <a href="#Regression">
               <div class="icon-box">
                 <div class="icon"><<i class='bx bxs-network-chart' ></i></div>
                 <h4 class="title"><a href="">Regression</a></h4>
                 <p class="description">Correlation matrix and pointing out some considerable results. Using that information
-                  and R we tried to make a linear model but since that is not completely suitable we also made a logistic regression.
+                  with R we tried to make a linear model but since that is not completely suitable we also made a logistic regression.
                 </p>
               </div>
             </a>
@@ -251,37 +251,6 @@
     </div>
   </section><!-- End RESULTS MENU -->
 
-  <!-- CHOOSING THE DATASET -->
-  <section id="datasetDescription" class="about">
-    <div class="container">
-
-      <div class="row justify-content-between">
-        <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-          <img src={{url_for('static', filename="assets/img/about-img.svg" )}} class="img-fluid" alt="" data-aos="zoom-in">
-        </div>
-        <div class="col-lg-6 pt-5 pt-lg-0">
-          <h3 data-aos="fade-up">Choosing the dataset</h3>
-          <p data-aos="fade-up" data-aos-delay="100">
-            At that time we had no idea about satans' contribution to the dataset because it turned out to be an absolute hell.
-          </p>
-          <div class="row">
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-receipt"></i>
-              <h4>Nothing works</h4>
-              <p>There is like literally 0 things that run smoothly in this dataset</p>
-            </div>
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-cube-alt"></i>
-              <h4>It might be just us being dummy</h4>
-              <p>But let's blame our educational system for that</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </section>
-  <!-- END CHOOSING THE DATASET -->
 
   <!-- CATEGORIES AND THEIR STATISTICS-->
   <section id="GeneralStatistics" class="services section-bg">
@@ -294,7 +263,7 @@
       <div class="row"> 
         <p>
           {% for j in range((info_cat|length/6)|int + 1) %}
-            <div class="row justify-content-center" data-aos="fade-up">
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="{{100*j}}">
               {% for i in range(1,7) if not (6*j + i > info_cat|length) %}
               <div class="col-2 mb-2">
                   <button type="button" class="btn btn-orange col-12" data-html='true'  data-toggle="popover" title="Statistics" data-content='<table class="table">
@@ -343,18 +312,18 @@
 
       <div class="row justify-content-center">
         <div class="col-lg-12 pt-5 pt-lg-0 text-center">
-          <div class="section-title ">
+          <div class="section-title " data-aos="fade-up">
             <h2>Results</h2>
             <p>Some general statistics</p>
             
           </div>
           <div class="row about team py-0">
            
-            <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="100">
               <i class='bx bx-analyse' style="position: relative;z-index: 1;"></i>
               <h4 style="position: relative;z-index: 1;">Distribution of marks</h4>
               <p style="font-size: .9em ;position: relative;z-index: 1;">Appears to be normal (except for the 0 points)</p>
-              <div id="chart_div" class="col-12" style="width: 1100px; height: 500px; margin-top:-60px;"  data-aos="zoom-in"></div>
+              <div id="chart_div" class="col-12" style="width: 1100px; height: 500px; margin-top:-60px;"  data-aos="zoom-in" data-aos-delay="100"></div>
             </div>
 
             <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
@@ -362,26 +331,26 @@
               <h4 style="position: relative;z-index: 1;">Proportion of students from each of the schools</h4>
               <p style="font-size: .9em ;position: relative;z-index: 1;">It can be seen that Gabriela Pereira school has a greater proportion of students, so this property is not distinctive</p>
 
-              <div id="chart1" class="chart col-12" style="width: 1100px; height: 500px; margin-top:-80px;"  data-aos="zoom-in"></div>
+              <div id="chart1" class="chart col-12" style="width: 1100px; height: 500px; margin-top:-80px;"  data-aos="zoom-in" data-aos-delay="200"></div>
             </div>
           </div>
 
           <div class="row about team py-0">
            
-            <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="300">
               <i class='bx bx-body' style="position: relative;z-index: 1;"></i>
               <h4 style="position: relative;z-index: 1;">Age Distribution</h4>
               <p style="font-size: .9em ;position: relative;z-index: 1;">The greatest part of the dataset are students of age 15-18 which are distributed almost uniformly. Pupils who are 19 years or older represent only a small portion, so the dataset is focused mainly on high school students.</p>
 
-              <div id="chart2" class="chart col-12" style="width: 1100px; height: 500px; margin-top:-85px; "  data-aos="zoom-in"></div>
+              <div id="chart2" class="chart col-12" style="width: 1100px; height: 500px; margin-top:-85px; "  data-aos="zoom-in " data-aos-delay="300"></div>
             </div>
 
-            <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="400">
               <i class='bx bx-female-sign' style="position: relative;z-index: 1;"></i>
               <h4 style="position: relative;z-index: 1;">Sex distribution</h4>
               <p style="font-size: .9em ;position: relative;z-index: 1;">The proportion of women is a bit bigger but we can say that the proportion is balanced.</p>
 
-              <div id="chart3" class="chart col-12" style="width: 1100px; height: 500px;  margin-top:-50px;"  data-aos="zoom-in"></div>
+              <div id="chart3" class="chart col-12" style="width: 1100px; height: 500px;  margin-top:-50px;"  data-aos="zoom-in" data-aos-delay="400"></div>
             </div>
           </div>
          
@@ -397,25 +366,28 @@
     <div class="container">
 
       <div class="row justify-content-between pb-5">
-        <div class="col-lg-6 pt-5 pt-lg-0 ">
-          <h3 data-aos="fade-up">There might be something fishy going on</h3>
+        <div class="col-lg-6 pt-5 pt-lg-0 border-right" data-aos="fade-up">
+          <h3 data-aos="fade-up">Comparing the best and the worst</h3>
           <p data-aos="fade-up" data-aos-delay="100">
-            And when he had finished speaking, he said to Simon, “Put out into the deep and let down your nets for a catch.”
+            We took a look at four groups - Students with more than 17 points in the last test, All students, Students that got 0 points and since that
+            could be affected by the high number of students that got 0 points we also considered Worst students(4 to 6 points) where those who got 0 are excluded. In this graph,
+            we compared the mean of their marks (G1, G2 and G3). You can simply choose a category and a barplot that compares means in those groups appears. Some results we concluded are:
           </p>
           <div class="row">
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-receipt"></i>
-              <h4>Just keep swimming</h4>
-              <p>There is like literally 0 things that run smoothly in this dataset</p>
+              <i class='bx bx-female' ></i>
+              <h4>Mother's education</h4>
+              <p>The mean in the best group considering mother's education was by 0.7 higher than overall mean. However the worst group was not that far from the overall mean when excluded the "0-points" students.
+              </p>
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-cube-alt"></i>
-              <h4>Haven't found a good regression let alone Nemo</h4>
-              <p>But let's blame our educational system for that</p>
+              <i class='bx bx-universal-access' ></i>
+              <h4>Single is good</h4>
+              <p>Majority of the best students are not in the relationship (0.055) compared to mean for all studetns. Interestingly enough, the value is quite high among the students that received 0 points in the last test.</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 border-left"  data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-6 pt-5 pt-lg-0 my-auto"  data-aos="fade-up" data-aos-delay="100">
           <select id="selectOption" class="form-select" style="position: relative; z-index:1;" aria-label="Select category" onchange="generateChart()">
             <option value="Medu">Mother's education | 0 worst - 4 best</option>
             <option value="Fedu">Father's education | 0 worst - 4 best</option>
@@ -461,8 +433,8 @@
         <div class="col-lg-6 ps-5 pt-3 my-auto">
           <h3 data-aos="fade-up">Oh-oh, that's what makes you succesful!</h3>
           <p data-aos="fade-up" data-aos-delay="100">
-            Ever wondered if it is just in your blood that you are stupid like a bagandža? Don't worry, we took a closer look 
-            at those portugese students and found that it is just your lazy ass that just cannot stop scrolling on IG.
+            Probably the most natural question that comes to our minds when talking about school results is whether there are some indicators that impact 
+            students' marks whether negatively or positively and if so, how significant the impact is. We took a look at the following three:
           </p>
         </div>
         <div class="row about team mt-4 pt-0 text-center justify-content-center">
@@ -474,13 +446,13 @@
               <div class="member-info">
                 <div class="member-info-content text-right  pe-2">
                   <h4>Impact of parent's education on academical results</h4>
-                  <span>Whatever that line is supposed to mean it's going up so i guess its good</span>
+                  <span>By following the most significant points(the biggest ones) we can see that average raises noticably.</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <i class='bx bx-home' ></i>
             <h4>Family size impact</h4>
             <div class="member">
@@ -488,7 +460,9 @@
               <div class="member-info">
                 <div class="member-info-content text-right pe-2">
                   <h4>Impact on family size on academical results</h4>
-                  <span>Does not matter</span>
+                  <span>The dots are coloured by the fraction (number of students with that amount of points from one of the groups divided by the size of the groups).
+                     Seeing that the colors are distributed the same way on both left and right we might say that the size of the family doesn't bring a crucial impact on the grades.
+                  </span>
                 </div>
               </div>
             </div>
@@ -496,7 +470,7 @@
         </div>
 
         <div class="row about team pt-0 text-center justify-content-center">
-          <div class="col-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6" data-aos="fade-up" data-aos-delay="300">
             <i class='bx bx-male-female'></i>
             <h4>Girls vs Boys</h4>
             <div class="member ">
@@ -518,13 +492,13 @@
   <!-- END WHAT MAKES YOU SUCCESSFUL-->
 
  <!-- HYPOTHESES -->
-  <section id="Hypotheses" class="services section-bg">
+  <section id="Hypotheses" class="services section-bg" style="position: relative; z-index: 10;">
     <div class="container">
       <div class="row justify-content-center about">
         <div class="col-lg-6 ps-5 pt-5 pb-0 mb-0">
           <h3 data-aos="fade-up">Now it's gonna get all hypothetical</h3>
           <p data-aos="fade-up" data-aos-delay="100">
-            We bet you already got many hypotheses on your mind after reading all this. Want to compare certain groups in our database? Of course you can!
+            We bet you already got many hypotheses on your mind after reading all this. Want to compare certain groups in our database?
           </p>
         </div>
         <div class="col-lg-6 about-img ">
@@ -535,12 +509,12 @@
         <div class="section-title" data-aos="zoom-in">
           <p style="color:#eb5d1e">Test your hypothesis!</p>
         </div>
-        <div class="col-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-12 d-flex justify-content-center" data-aos="zoom-in" >
           <p class="my-auto">In category</p>
-          <div class="dropup show ps-1">
+          <div class="dropdown show ps-1">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="cat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
           
-            <div class="dropdown-menu" style="position:relative; z-index:1;" aria-labelledby="cat">
+            <div class="dropdown-menu dropup" style="position:relative; z-index:1;" aria-labelledby="cat" data-dropup-auto="false">
               {% for cat in info_cat %}
               <a class="dropdown-item" onclick="updateResult('cat',this)" >{{cat[0]}}</a>
               {% endfor %}
@@ -563,7 +537,7 @@
   <section id="Regression" class="services ">
 
     <div class="container">
-      <div class="section-title ">
+      <div class="section-title " data-aos="fade-up">
         <h2>Regression</h2>
         <p>Correlation matrix</p>
       
@@ -575,19 +549,19 @@
 
       
         <div class="col-lg-6 ps-5 pt-3 my-auto">
-          <h3 data-aos="fade-up">Choosing appropriate categories for logistic regression</h3>
+          <h3 data-aos="fade-up">Choosing appropriate categories for the regression</h3>
           <p data-aos="fade-up" data-aos-delay="100">
-            Think twice, cut once - said one famous director. So we also took a look at correlation between each pair of categories, 
-            so that our awesome regression looks even sexier - it can be seen that the grades would have greatest impact and also some other 
-            pointers. Whatever, it worked.
+            To get the highest precision in our model we wanted to choose categories that correlate enough, with a desired coefficient
+            and under the assumption that the correlation is linear.
+            Plotting a correlation matrix gave us some hints that we used later when creating the model.
           </p>
           <div class="row">
-            <div class="col-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-6" data-aos="fade-up" data-aos-delay="200">
               <i class='bx bxs-book' ></i>
               <h4>Grades do make an impact</h4>
-              <p>No idea how that makes sense</p>
+              <p>Which is a quite obvious observation but also turned out to be helpful</p>
             </div>
-            <div class="col-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-6" data-aos="fade-up" data-aos-delay="300">
               <i class='bx bx-x'></i>
               <h4>Failures</h4>
               <p>have rather negative correlation which does impact the grades in an expected way</p>
@@ -598,16 +572,16 @@
       </div>
       <div class="row about mt-4">
         <h3 style="color: grey;" data-aos="fade-up">Some irrelevant (but still interesting) correlations</h3>
-        <div class="col-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-6" data-aos="fade-up" data-aos-delay="400">
           <i class='bx bx-happy-heart-eyes' ></i>
           <h4>Smart marriage</h4>
           <p>There is a correlation that implies man with higher education also tend to marry women at similar knowledge level</p>
         </div>
-        <div class="col-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-6" data-aos="fade-up" data-aos-delay="500">
           <i class='bx bxs-drink' ></i>
           <h4>Alcoholics stay alcoholics</h4>
           <p>Students with higher alcohol consumption during weekdays also have a tendency to drink during the weekend. Also students that
-            got are more prone to drinking alcohol.
+            like to go out are more prone to drinking alcohol.
           </p>
         </div>
       </div>
@@ -617,38 +591,63 @@
   <!-- END CORRELATION -->
 
   <!-- 3D REGRESION -->
-  <section id="result4" class="about section-bg">
+  <section id="LinearRegression" class="about section-bg">
     <div class="container">
       <div class="row justify-content-between">
         <div class=" col-lg-6 d-flex align-items-center justify-content-center about-img" data-aos="zoom-in">
           <div id="chart" class="chart" style="width:700px; height:600px;"></div>
         </div>
-        <div class="col-lg-6 ps-5 pt-3 ">
+        <div class="col-lg-6 ps-5 pt-3 my-auto">
           <h3 data-aos="fade-up">Linear model</h3>
           <p data-aos="fade-up" data-aos-delay="100">
-            GIVE IT A DESCRIPTION MAAAAAAAAAAAAAAAAATEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            We know that G3 is discrete variable ranging from 0 to 20, so the linear regression might not be the best way of predicting results,
+             but in the following we will use logistic regression as well. We are also right to think that the observation are independent of
+              each other. 
+
           </p>
           <div class="row">
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-receipt"></i>
-              <h4>Something important</h4>
-              <p>Very serious important matter indeed is being discussed</p>
+              <i class='bx bx-check-shield' ></i>
+              <h4>Success rate: 83%</h4>
+              <!-- <p>Very serious important matter indeed is being discussed</p> -->
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-cube-alt"></i>
-              <h4>Something amazing</h4>
-              <p>Splendid language required to make this part LIT</p>
+              <i class='bx bx-alarm-exclamation'></i>
+              <h4>Is not suitable</h4>
+              <p>This model is not suitable for discrete data</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-between">
+        <div class="col-lg-6 ps-5 pt-3">
+          <h3 data-aos="fade-up">Logistic regression</h3>
+          <p data-aos="fade-up" data-aos-delay="100">
+            We can easily binary classify the results of the G3 test. More than or equal to 10 means pass, less than 10  means fail. 
+            Under the assumption that between the variables there are linear relationships. 
+          </p>
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <i class='bx bx-check-shield' ></i>
+              <h4>Success rate: 83%</h4>
+              <!-- <p>Very serious important matter indeed is being discussed</p> -->
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <i class='bx bx-check'></i>
+              <h4>Suitble</h4>
+              <p>Good for looking for the importance of the given variables</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 about-img " data-aos="fade-up" data-aos-delay="400">
+          <img src={{url_for('static', filename="assets/img/lireg.png" )}} class="img-fluid d-flex mx-auto" style="height:60%; " alt="" data-aos="zoom-in">
         </div>
       </div>
       
     </div>
   </section>
   <!-- END 3D REGRESION -->
-
-
-    
 
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script type="text/javascript">
@@ -664,6 +663,7 @@
   </script>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
   <script type="text/javascript">
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart);
