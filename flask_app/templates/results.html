@@ -4,67 +4,68 @@
 
   <main id="main">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawCharts);
+  <!-- PIE CHARTS-->
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawCharts);
 
-      function drawCharts() {
-        // First Pie Chart
-        var data1 = google.visualization.arrayToDataTable([
-          ['School', 'Number of Students'],
-          ['Gabriel Pereira ', 281],
-          ['Mousinho da Silveira', 114],
-        ]);
+    function drawCharts() {
+      // First Pie Chart
+      var data1 = google.visualization.arrayToDataTable([
+        ['School', 'Number of Students'],
+        ['Gabriel Pereira ', 281],
+        ['Mousinho da Silveira', 114],
+      ]);
 
-        var options1 = {
-          pieHole: 0.4,
-          colors: ['#2f4858', '#86bbd8'],
-          pieSliceText: 'none',
-        };
+      var options1 = {
+        pieHole: 0.4,
+        colors: ['#2f4858', '#86bbd8'],
+        pieSliceText: 'none',
+      };
 
-        var chart1 = new google.visualization.PieChart(document.getElementById('chart1'));
-        chart1.draw(data1, options1);
+      var chart1 = new google.visualization.PieChart(document.getElementById('chart1'));
+      chart1.draw(data1, options1);
 
-        // Second Pie Chart
-        var data2 = google.visualization.arrayToDataTable([
-          ['Age', 'Count'],
-          ['15', 82],
-          ['16', 104],
-          ['17', 98],
-          ['18', 82],
-          ['19', 24],
-          ['20', 3],
-          ['21', 1],
-          ['22', 1]
-        ]);
+      // Second Pie Chart
+      var data2 = google.visualization.arrayToDataTable([
+        ['Age', 'Count'],
+        ['15', 82],
+        ['16', 104],
+        ['17', 98],
+        ['18', 82],
+        ['19', 24],
+        ['20', 3],
+        ['21', 1],
+        ['22', 1]
+      ]);
 
-        var options2 = {
-          pieHole: 0.4,
-          colors: ['#a4243b', '#d8c99b', "#d8973c", "#bd632f", "068DA9", "7E1717", "E55807", "2CD3E1"],
-          pieSliceText: 'none',
-        };
+      var options2 = {
+        pieHole: 0.4,
+        colors: ['#a4243b', '#d8c99b', "#d8973c", "#bd632f", "068DA9", "7E1717", "E55807", "2CD3E1"],
+        pieSliceText: 'none',
+      };
 
-        var chart2 = new google.visualization.PieChart(document.getElementById('chart2'));
-        chart2.draw(data2, options2);
+      var chart2 = new google.visualization.PieChart(document.getElementById('chart2'));
+      chart2.draw(data2, options2);
 
-        // Third Pie Chart
-        var data3 = google.visualization.arrayToDataTable([
-          ['sex', 'Count'],
-          ['Females', 208],
-          ['Males', 187]
-        ]);
+      // Third Pie Chart
+      var data3 = google.visualization.arrayToDataTable([
+        ['sex', 'Count'],
+        ['Females', 208],
+        ['Males', 187]
+      ]);
 
-        var options3 = {
-          pieHole: 0.4,
-          colors: ['#273e47', '#bd632f'],
-          pieSliceText: 'none',
-        };
+      var options3 = {
+        pieHole: 0.4,
+        colors: ['#273e47', '#bd632f'],
+        pieSliceText: 'none',
+      };
 
-        var chart3 = new google.visualization.PieChart(document.getElementById('chart3'));
-        chart3.draw(data3, options3);
-      }
-    </script>
-
+      var chart3 = new google.visualization.PieChart(document.getElementById('chart3'));
+      chart3.draw(data3, options3);
+    }
+  </script>
+  <!-- BAR CHART (MEAN)-->
   <script type="text/javascript">
   var topka = new Map([
     {% for point in najlepsi %}
@@ -111,9 +112,10 @@
       }, 2]);
 
       var options = {
-        title: 'Means of a given variable in the specific groups',
+        title: 'Mean of a given variable in the specific groups',
         width: 600,
         height: 400,
+        backgroundColor: '#fef8f5',
         bar: { groupWidth: '95%' },
         legend: { position: 'none' },
       };
@@ -122,46 +124,47 @@
       chart.draw(view, options);
     }
     google.charts.setOnLoadCallback(generateChart);
-    </script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(drawChart);
+  </script>
 
-  function drawChart() {
-    var pointsData = [['Points', 'Count']];
-    var pointMap = new Map([
-      {% for point in points %}
-        [{{ point[0] }}, {{ point[1] }}],
-      {% endfor %}
-    ]);
+  <!-- GRADES DISTRIBUTION CHART-->
+  <script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
 
-    for (var i = 0; i <= 20; i++) {
-      var count = pointMap.has(i) ? pointMap.get(i) : 0;
-      pointsData.push([i, count]);
-    }
+    function drawChart() {
+      var pointsData = [['Points', 'Count']];
+      var pointMap = new Map([
+        {% for point in points %}
+          [{{ point[0] }}, {{ point[1] }}],
+        {% endfor %}
+      ]);
 
-    var data = google.visualization.arrayToDataTable(pointsData);
-
-    var options = {
-      title: 'Distribution of the different grades in the G3 test',
-      legend: { position: 'none' },
-      viewWindow: {
-          min: -1,
-          max: 20.5
-        },
-      hAxis: {
-        title: 'Points',
-      },
-      vAxis: {
-        title: 'Count',
+      for (var i = 0; i <= 20; i++) {
+        var count = pointMap.has(i) ? pointMap.get(i) : 0;
+        pointsData.push([i, count]);
       }
-    };
 
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-</script>
+      var data = google.visualization.arrayToDataTable(pointsData);
+
+      var options = {
+        title: 'Distribution of the different grades in the G3 test',
+        legend: { position: 'none' },
+        viewWindow: {
+            min: -1,
+            max: 20.5
+          },
+        hAxis: {
+          title: 'Points',
+        },
+        vAxis: {
+          title: 'Count',
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
 
 
   <!-- ======= Breadcrumbs Section ======= -->
@@ -189,44 +192,59 @@
         <p>Our visualisation and analysis</p>
       </div>
       <div class="row">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-          <a href="#result1">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-question-mark"></i></div>
-            <h4 class="title"><a href="">Women are dumb</a></h4>
-            <p class="description">As has always been said by the wisest, by God himself blessed gender - male - they do belong in the kitchen</p>
-            </div>
-          </div>
-          </a>
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
-            <a href="#result2">
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <a href="#GeneralStatistics">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-money-withdraw"></i></div>
-              <h4 class="title"><a href="">Money heist</a></h4>
-              <p class="description">Aint gonna help you make your kids grades higher - sorry m8, genetics is genetics</p>
+              <div class="icon"><i class='bx bxs-pie-chart-alt-2' ></i></div>
+                <h4 class="title"><a href="">General dataset review</a></h4>
+                <p class="description">Some simple statistical values, proportion of male and female students in the dataset as well as visualising the age distribution.
+                  Estimating the grades distribution by plotting a bar chart and showing why analysing schools separately could by biased by the size of the representatives.
+                </p>
+              </div>
+            </div>
+          </a>
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+            <a href="#BarPlotMeans">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bxs-objects-horizontal-left' ></i></div>
+              <h4 class="title"><a href="">Comparing means</a></h4>
+              <p class="description">Visualising mean in various groups for a selected category and comparing the results</p>
             </div>
           </a>
           </div>
 
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
-            <a href="#result3">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-drink"></i></div>
-              <h4 class="title"><a href="">Alcoholics stay alocoholics</a></h4>
-              <p class="description">After a thorough inspection we figured out that people that drink during the weekend also drink during the workdays - maybe thats why the money aint helping</p>
-            </div>
-          </a>
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+            <a href="#SuccessWhat">
+              <div class="icon-box">
+                <div class="icon"><i class='bx bx-trending-up' ></i></div>
+                <h4 class="title"><a href="">Analysing possible success pointers</a></h4>
+                <p class="description">A closer look at what might impact students' grades either positively or negatively. Making a visualisation using R's graphs.</p>
+              </div>
+            </a>
           </div>
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
-            <a href="#result4">
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
+            <a href="#Hypotheses">
             <div class="icon-box">
-              <div class="icon"><i class="bx bxs-hot"></i></div>
-              <h4 class="title"><a href="">Smart chicks are just hot</a></h4>
-              <p class="description">Looks like our male audience likes to make a selection based on the academical results of the potential mating partner</p>
+              <div class="icon"><i class='bx bx-test-tube' ></i></div>
+              <h4 class="title"><a href="">T-tests</a></h4>
+              <p class="description">Interactive way of showing p-values and testing statistical hypotheses.</p>
             </div>
-          </a>
-      
+            </a>
           </div>
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+            <a href="#Regression">
+              <div class="icon-box">
+                <div class="icon"><<i class='bx bxs-network-chart' ></i></div>
+                <h4 class="title"><a href="">Regression</a></h4>
+                <p class="description">Correlation matrix and pointing out some considerable results. Using that information
+                  and R we tried to make a linear model but since that is not completely suitable we also made a logistic regression.
+                </p>
+              </div>
+            </a>
+          </div>
+
       </div>
 
 
@@ -234,7 +252,7 @@
   </section><!-- End RESULTS MENU -->
 
   <!-- CHOOSING THE DATASET -->
-  <section id="result1" class="about">
+  <section id="datasetDescription" class="about">
     <div class="container">
 
       <div class="row justify-content-between">
@@ -266,7 +284,7 @@
   <!-- END CHOOSING THE DATASET -->
 
   <!-- CATEGORIES AND THEIR STATISTICS-->
-  <section id="result2" class="services section-bg">
+  <section id="GeneralStatistics" class="services section-bg">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
@@ -320,7 +338,7 @@
 
 
   <!-- GENERAL STATISTICS-->
-  <section id="result3" class="services ">
+  <section id="GeneralStatisticsGraphs" class="services pb-0">
     <div class="container">
 
       <div class="row justify-content-center">
@@ -355,7 +373,7 @@
               <h4 style="position: relative;z-index: 1;">Age Distribution</h4>
               <p style="font-size: .9em ;position: relative;z-index: 1;">The greatest part of the dataset are students of age 15-18 which are distributed almost uniformly. Pupils who are 19 years or older represent only a small portion, so the dataset is focused mainly on high school students.</p>
 
-              <div id="chart2" class="chart col-12" style="width: 1100px; height: 500px; margin-top:-50px; "  data-aos="zoom-in"></div>
+              <div id="chart2" class="chart col-12" style="width: 1100px; height: 500px; margin-top:-85px; "  data-aos="zoom-in"></div>
             </div>
 
             <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="200">
@@ -374,12 +392,12 @@
   </section>
   <!-- END GENERAL STATISTICS -->
 
-  <!-- UNFINISHED -->
-  <section id="result2" class="about section-bg">
+  <!-- MEANS(BAR PLOT)-->
+  <section id="BarPlotMeans" class="about section-bg">
     <div class="container">
 
-      <div class="row justify-content-between">
-        <div class="col-lg-6 pt-5 pt-lg-0">
+      <div class="row justify-content-between pb-5">
+        <div class="col-lg-6 pt-5 pt-lg-0 ">
           <h3 data-aos="fade-up">There might be something fishy going on</h3>
           <p data-aos="fade-up" data-aos-delay="100">
             And when he had finished speaking, he said to Simon, “Put out into the deep and let down your nets for a catch.”
@@ -397,43 +415,40 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-          <img src={{url_for('static', filename="assets/img/fis.png" )}} class="img-fluid" alt="" data-aos="zoom-in">
+        <div class="col-lg-6 pt-5 pt-lg-0 border-left"  data-aos="fade-up" data-aos-delay="100">
+          <select id="selectOption" class="form-select" style="position: relative; z-index:1;" aria-label="Select category" onchange="generateChart()">
+            <option value="Medu">Mother's education | 0 worst - 4 best</option>
+            <option value="Fedu">Father's education | 0 worst - 4 best</option>
+            <option value="traveltime">Traveltime | 1 shortest - 4 longest</option>
+            <option value="studytime">Studytime | 1 shortest - 4 longest</option>
+            <option value="failures">Past failures | 0 to 3</option>
+            <option value="schoolsup">Extra educational support | FALSE/TRUE</option>
+            <option value="famsup">Family educational support | FALSE/TRUE</option>
+            <option value="paid">Paid lessons | FALSE/TRUE</option>
+            <option value="activities"> Extra-curricular activities | FALSE/TRUE</option>
+            <option value="nursery">Attended nursery | FALSE/TRUE</option>
+            <option value="higher">Ambitions to take higher education | FALSE/TRUE</option>
+            <option value="internet">Internet access at home | FALSE/TRUE</option>
+            <option value="romantic">In a relationship | FALSE/TRUE</option>
+            <option value="famrel">Quality of family relationships | 1 worst - 5 best</option>
+            <option value="freetime">Freetime | 1 very low - 5 very high</option>
+            <option value="goout">Going out with friends | 1 very low - 5 very high</option>
+            <option value="Dalc">Workday alcohol consumption | 1 very low - 5 very high</option>
+            <option value="Walc">Weekend alcohol consumption | 1 very low - 5 very high</option>
+            <option value="health">Current health status | 1 worst - 5 best</option>
+            <option value="absences">Number of school absences| 0 to 93</option>
+            <option value="G1">G1 score | 0 to 20</option>
+            <option value="G2">G2 score | 0 to 20</option>
+          </select>
+          <div id="barchart_values" style="width: 900px; height: 300px;margin-top:-20px;"></div>
         </div>
-      </div>
       <div>
-    <select id="selectOption" onchange="generateChart()">
-      <option value="Medu">Mother's education | 0 worst - 4 best</option>
-      <option value="Fedu">Father's education | 0 worst - 4 best</option>
-      <option value="traveltime">Traveltime | 1 shortest - 4 longest</option>
-      <option value="studytime">Studytime | 1 shortest - 4 longest</option>
-      <option value="failures">Past failures | 0 to 3</option>
-      <option value="schoolsup">Extra educational support | FALSE/TRUE</option>
-      <option value="famsup">Family educational support | FALSE/TRUE</option>
-      <option value="paid">Paid lessons | FALSE/TRUE</option>
-      <option value="activities"> Extra-curricular activities | FALSE/TRUE</option>
-      <option value="nursery">Attended nursery | FALSE/TRUE</option>
-      <option value="higher">Ambitions to take higher education | FALSE/TRUE</option>
-      <option value="internet">Internet access at home | FALSE/TRUE</option>
-      <option value="romantic">In a relationship | FALSE/TRUE</option>
-      <option value="famrel">Quality of family relationships | 1 worst - 5 best</option>
-      <option value="freetime">Freetime | 1 very low - 5 very high</option>
-      <option value="goout">Going out with friends | 1 very low - 5 very high</option>
-      <option value="Dalc">Workday alcohol consumption | 1 very low - 5 very high</option>
-      <option value="Walc">Weekend alcohol consumption | 1 very low - 5 very high</option>
-      <option value="health">Current health status | 1 worst - 5 best</option>
-      <option value="absences">Number of school absences| 0 to 93</option>
-      <option value="G1">G1 score | 0 to 20</option>
-      <option value="G2">G2 score | 0 to 20</option>
-    </select>
-  </div>
-      <div id="barchart_values" style="width: 900px; height: 300px;"></div>
     </div>
   </section>
-  <!-- END UNFINISHED-->
+  <!-- END MEANS(BAR PLOT)-->
 
   <!-- WHAT MAKES YOU SUCCESSFUL-->
-  <section id="result4" class="about">
+  <section id="SuccessWhat" class="about">
 
     <div class="container">
 
@@ -503,7 +518,7 @@
   <!-- END WHAT MAKES YOU SUCCESSFUL-->
 
  <!-- HYPOTHESES -->
-  <section id="result4" class="services section-bg">
+  <section id="Hypotheses" class="services section-bg">
     <div class="container">
       <div class="row justify-content-center about">
         <div class="col-lg-6 ps-5 pt-5 pb-0 mb-0">
@@ -544,11 +559,8 @@
   </section>
   <!-- END HYPOTHESIS -->
 
-
-
-
   <!-- CORRELATION -->
-  <section id="result4" class="services ">
+  <section id="Regression" class="services ">
 
     <div class="container">
       <div class="section-title ">
@@ -606,30 +618,26 @@
 
   <!-- 3D REGRESION -->
   <section id="result4" class="about section-bg">
-
     <div class="container">
-
       <div class="row justify-content-between">
-
-
-        <div class=" col-lg-4 d-flex align-items-center justify-content-center about-img" data-aos="zoom-in">
-          <div id="chart" class="chart "></div>
+        <div class=" col-lg-6 d-flex align-items-center justify-content-center about-img" data-aos="zoom-in">
+          <div id="chart" class="chart" style="width:700px; height:600px;"></div>
         </div>
         <div class="col-lg-6 ps-5 pt-3 ">
-          <h3 data-aos="fade-up">Oh-oh, that's what makes you succesful!</h3>
+          <h3 data-aos="fade-up">Linear model</h3>
           <p data-aos="fade-up" data-aos-delay="100">
-            How various categories impact students' results and overall academical work
+            GIVE IT A DESCRIPTION MAAAAAAAAAAAAAAAAATEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
           </p>
           <div class="row">
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
               <i class="bx bx-receipt"></i>
-              <h4>Unless you watch fimls illegaly</h4>
-              <p>But those should be out of your range of interest</p>
+              <h4>Something important</h4>
+              <p>Very serious important matter indeed is being discussed</p>
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
               <i class="bx bx-cube-alt"></i>
-              <h4>Ask the mirror on the wall</h4>
-              <p>whether you can fuck with them all</p>
+              <h4>Something amazing</h4>
+              <p>Splendid language required to make this part LIT</p>
             </div>
           </div>
         </div>
