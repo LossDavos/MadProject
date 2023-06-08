@@ -29,21 +29,28 @@ def home():
 @app.route('/results')
 def results():
     cur = g.db.cursor()
-    df = px.data.iris()
-    fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
-              color='species')
-    x1 = np.ones(100) + 5
-    y1 = np.linspace(1, 5, 100)
-    z1 = np.linspace(0, 3, 50)
-    rc = np.ones(100) + 40
-    plane = go.Surface(x=x1, y=y1, z=np.array([z1] * len(x1)), surfacecolor=rc, showscale=False)
-    fig.add_traces([plane])
+    df = pd.read_csv("student-mat.csv")
+    fig = px.scatter_3d(df, x='G1', y='G2', z='G3', color='sex', size = np.ones(len(df['G1'])))
+    x1 = np.linspace(0,20,100)
+    y1 = np.linspace(0,20, 100)
+    c1, c2, c3 = 0.15327, 0.98687, -1.83001 # parameters from R's lm() method
 
+    X, Y = np.meshgrid(x1,y1)
+    Z =c1*X + c2*Y + c3
+    rc = np.ones(100) + 40
+    color = 'rgba(51, 101, 138, .7)'  # Red color with 0.7 opacity
+    plane = go.Surface(x=X, y=Y, z=Z, showscale=False, colorscale=[[0, color], [1, color]], opacity=0.7)
+    fig.add_traces([plane])
+    fig.update_layout(scene=dict(
+        bgcolor='#fef8f5'  # Set the background color of the scene
+    ),
+        plot_bgcolor='#fef8f5',  # Set the background color of the plot area
+        paper_bgcolor='#fef8f5'  # Set the background color of the paper
+    )
+    plot_div = fig.to_html(full_html=False)
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    header="Fruit in North America"
     description = """
-    A academic study of the number of apples, oranges and bananas in the cities of
-    San Francisco and Montreal would probably not come up with this chart.
+    Linear regression model using categories G1, G2 and G3 and separating the points by their gender.
     """
 
 
@@ -141,11 +148,12 @@ FROM student_data WHERE G3=0;
        AVG(G2) AS mean_G2
 FROM student_data WHERE (G3 >= 4 AND G3 <= 6);
 """).fetchall()[0]
-    options = ["Medu", "Fedu", "traveltime", "studytime", "failures", "schoolsup", "famsup", "paid", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "absences", "G1", "G2"]
-    return render_template('results.html', graphJSON=graphJSON, header=header,description=description, points = points, info_cat=cursor.fetchall(),
-                           najlepsi = najlepsi, vsetci = vsetci, najhorsi_0 = najhorsi_0, najhorsi_nie_0 = najhorsi_nie_0, options = options)
+    
 
-    # return render_template("results.html")
+
+    options = ["Medu", "Fedu", "traveltime", "studytime", "failures", "schoolsup", "famsup", "paid", "activities", "nursery", "higher", "internet", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "absences", "G1", "G2"]
+    return render_template('results.html', graphJSON=graphJSON, description=description, points = points, info_cat=cursor.fetchall(),
+                           najlepsi = najlepsi, vsetci = vsetci, najhorsi_0 = najhorsi_0, najhorsi_nie_0 = najhorsi_nie_0, options = options)
 
 @app.route('/tiy')
 def tyi():
