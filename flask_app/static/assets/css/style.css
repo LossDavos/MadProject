@@ -455,7 +455,7 @@ h6,
 --------------------------------------------------------------*/
 section {
   padding: 60px 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .section-bg {
@@ -931,14 +931,14 @@ section {
   font-weight: 700;
   margin-bottom: 2px;
   font-size: 18px;
-  color: #fff;
+  color: #000;
 }
 
 .team .member .member-info-content span {
   font-style: italic;
   display: block;
   font-size: 13px;
-  color: #fff;
+  color: rgb(79, 79, 79);
 }
 
 .team .member .social {
@@ -969,7 +969,7 @@ section {
 }
 
 .team .member:hover .member-info {
-  background: linear-gradient(0deg, rgba(78, 64, 57, 0.95) 0%, rgba(78, 64, 57, 0.95) 15%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(145deg, rgba(2,0,36,0) 0%, rgba(232,140,52, 0) 50%, #eb5d1eec 100%);
   opacity: 1;
   transition: 0.4s;
 }

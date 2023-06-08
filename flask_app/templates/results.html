@@ -3,7 +3,6 @@
 {% block results %}
 
   <main id="main">
-  
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
   var topka = new Map([
@@ -380,6 +379,88 @@
       </div>
     </section>
     <!-- END RESULT 3-->
+    <section id="result4" class="about section-bg">
+
+      <div class="container">
+
+        <div class="row justify-content-between ">
+          <div class="col-lg-5 d-flex align-items-center justify-content-center about-img ms-5 pe-0">
+            <img src={{url_for('static', filename="assets/img/success.png" )}} class="img-fluid" style="margin-top:-100px;position:relative; z-index: 1; " alt="" data-aos="zoom-in">
+          </div>
+
+        
+          <div class="col-lg-6 ps-5 pt-3 my-auto">
+            <h3 data-aos="fade-up">Oh-oh, that's what makes you succesful!</h3>
+            <p data-aos="fade-up" data-aos-delay="100">
+              Ever wondered if it is just in your blood that you are stupid like a bagandža? Don't worry, we took a closer look 
+              at those portugese students and found that it is just your lazy ass that just cannot stop scrolling on IG.
+            </p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-4" data-aos="fade-up" data-aos-delay="100">
+              <i class='bx bx-bulb' ></i>
+              <h4>Geniuses are born</h4>
+              <p>No matter how hard you try, if your father aint Einstein you are probably stupido</p>
+            </div>
+            <div class="col-4" data-aos="fade-up" data-aos-delay="200">
+              <i class='bx bx-shower' ></i>
+              <h4>You stink too</h4>
+              <p>Did you know the more you shower the less you stink?</p>
+            </div>
+            <div class="col-4" data-aos="fade-up" data-aos-delay="200">
+              <i class='bx bx-question-mark' ></i>
+              <h4>I don't know what else</h4>
+              <p>Sometimes you just run out of ideas which might be just another sign you are a woman</p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+ <!-- END RESULT 3-->
+ <section id="result4" class="services">
+
+  <div class="container">
+
+    <div class="row justify-content-center about">
+    
+      <div class="col-lg-6 ps-5 pt-5 pb-0 mb-0">
+        <h3 data-aos="fade-up">Now it's gonna get all hypothetical</h3>
+        <p data-aos="fade-up" data-aos-delay="100">
+          We bet you already got many hypotheses on your mind after reading all this. Want to compare certain groups in our database? Of course you can!
+        </p>
+      </div>
+      <div class="col-lg-6 about-img ">
+        <img src={{url_for('static', filename="assets/img/hypoth.png" )}} class="img-fluid d-flex mx-auto" style="height:60%; " alt="" data-aos="zoom-in">
+      </div>
+    </div>
+    <div class="row justify-content-center" style="margin-top: -200px;">
+      <div class="section-title" data-aos="zoom-in">
+        <p style="color:#eb5d1e">Test your hypothesis!</p>
+      </div>
+      <div class="col-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        <p class="my-auto">In category</p>
+        <div class="dropup show ps-1">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="cat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+        
+          <div class="dropdown-menu" style="position:relative; z-index:1;" aria-labelledby="cat">
+            {% for cat in info_cat %}
+            <a class="dropdown-item" onclick="updateResult('cat',this)" >{{cat[0]}}</a>
+            {% endfor %}
+          </div>
+        </div>
+        <p class="my-auto">, is</p>
+          <a class="btn btn-secondary text-light" role="button" id="g1" disabled></a>
+        <p class="my-auto">better than</p>
+          <a class="btn btn-secondary text-light" role="button" id="g2" disabled></a>
+        <p class="my-auto pb-1">?</p>
+      </div>
+      <div id="result" class="col-12 pt-3 text-center"></div>
+    </div>
+    
+  </div>
+</section>
 
     <!-- RESULT 4-->
     <section id="result4" class="about section-bg">
@@ -417,59 +498,157 @@
     <!-- END RESULT 4-->
 
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript">
+    
 
-    $(function () {
-        $('[data-toggle="popover"]').popover({
-            html: true,
-            sanitize: false,
-        });
-    });
-  var graphs = {{graphJSON | safe}};
-  Plotly.plot('chart',graphs,{});        
-</script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript">
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(drawChart);
+      $(function () {
+          $('[data-toggle="popover"]').popover({
+              html: true,
+              sanitize: false,
+          });
+      });
+    var graphs = {{graphJSON | safe}};
+    Plotly.plot('chart',graphs,{});        
+  </script>
 
-  function drawChart() {
-    var pointsData = [['Points', 'Count']];
-    var pointMap = new Map([
-      {% for point in points %}
-        [{{ point[0] }}, {{ point[1] }}],
-      {% endfor %}
-    ]);
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
 
-    for (var i = 0; i <= 20; i++) {
-      var count = pointMap.has(i) ? pointMap.get(i) : 0;
-      pointsData.push([i, count]);
-    }
+    function drawChart() {
+      var pointsData = [['Points', 'Count']];
+      var pointMap = new Map([
+        {% for point in points %}
+          [{{ point[0] }}, {{ point[1] }}],
+        {% endfor %}
+      ]);
 
-    var data = google.visualization.arrayToDataTable(pointsData);
+      for (var i = 0; i <= 20; i++) {
+        var count = pointMap.has(i) ? pointMap.get(i) : 0;
+        pointsData.push([i, count]);
+      }
 
-    var options = {
-      legend: { position: 'none' },
-      viewWindow: {
-          min: -1,
-          max: 20.5
+      var data = google.visualization.arrayToDataTable(pointsData);
+
+      var options = {
+        legend: { position: 'none' },
+        viewWindow: {
+            min: -1,
+            max: 20.5
+          },
+        hAxis: {
+          title: 'Points',
+          baselineColor: 'none',
+          // ticks: []
         },
-      hAxis: {
-        title: 'Points',
-        baselineColor: 'none',
-        // ticks: []
-      },
-      vAxis: {
-        title: 'Count',
+        vAxis: {
+          title: 'Count',
+
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+
+<script>
+  // Array with results
+  var results = {
+    {% for pr in info_cat %}
+    "{{pr[0]}}":["{{pr[1]}}", "{{pr[2]}}", {{pr[3]}}, {{pr[4]}}, {{pr[5]}}],
+    {% endfor %}
+  };
+
+  function showResult() {
+      // Get the selected values from the dropdown menus
+      var cat = document.getElementById("cat");
+      var g1 = document.getElementById("g1");
+      var g2 = document.getElementById("g2");
+
+      // Create the key to access the result in the results array
+      var key = cat.text;
+      var g1name = results[key][0];
+      var g2name = results[key][1];
+
+      g1.text = g1name;
+      g2.text = g2name;
+
+      var g1avg = results[key][2];
+      var g2avg = results[key][3];
+      var pval = results[key][4];
+      var result = "";
+      if(Math.abs(pval) > .5){
+        result = `<b>Yes!</b> The <b>p-value ${pval}</b> is high enough. Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
+        <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
+        g1.className = "";
+        g1.className = "";
+        g2.className = "";
+        cat.className = "";
+        cat.classList.add("btn");
+        cat.classList.add("btn-success");
+        cat.classList.add("dropdown-toggle");
+
+        g1.classList.add("btn");
+        g1.classList.add("btn-success");
+        g2.classList.add("btn");
+        g2.classList.add("btn-success");
+        document.getElementById("result").className = "";
+        document.getElementById("result").classList.add("mt-2");
+        document.getElementById("result").classList.add("p-2");
+
+
+        document.getElementById("result").classList.add("rounded");
+
+        document.getElementById("result").classList.add("border"); 
+        document.getElementById("result").classList.add("border-success");
+        document.getElementById("result").classList.add("text-success");
+        document.getElementById("result").classList.add("text-center");
+
 
       }
-    };
+      else{
+        result = `<b>No!</b> The <b>p-value ${pval}</b> is not considered significant. Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
+        <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
+        g1.className = "";
+        g2.className = "";
+        cat.className = "";
+        cat.classList.add("btn");
+        cat.classList.add("btn-danger");
+        cat.classList.add("dropdown-toggle");
+        g1.classList.add("btn");
+        g1.classList.add("btn-danger");
+        g2.classList.add("btn");
+        g2.classList.add("btn-danger");
+        document.getElementById("result").className = "";
+        document.getElementById("result").classList.add("mt-2");
+        document.getElementById("result").classList.add("p-2");
 
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
+
+        document.getElementById("result").classList.add("rounded");
+
+        document.getElementById("result").classList.add("border"); 
+        document.getElementById("result").classList.add("border-danger");
+        document.getElementById("result").classList.add("text-danger");
+        document.getElementById("result").classList.add("text-center");
+
+      }
+
+      document.getElementById("result").innerHTML = result;
+    }
+    
+    // Function to update the result automatically when both dropdowns are selected
+    function updateResult(w,elem) {
+      document.getElementById(w).text = elem.text;
+      var cat = document.getElementById("cat");
+
+      if (cat.text !== "") {
+        showResult();
+      }
+    }
 </script>
-  </main><!-- End #main -->
+</main><!-- End #main -->
 {% endblock %}

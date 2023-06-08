@@ -55,7 +55,7 @@ def results():
     
     cursor.execute("""SELECT Test, Group1, Group2, Estimate1, Estimate2, Statistic, p_value FROM t_tests""") 
 
-    points = cur.execute("SELECT G3, COUNT(*) AS group_size FROM student_data GROUP BY G3").fetchall()[0]
+    points = cur.execute("SELECT G3, COUNT(*) AS group_size FROM student_data GROUP BY G3").fetchall()
     najlepsi =cur.execute("""SELECT   AVG(Medu), AVG(Fedu),AVG(traveltime), AVG(studytime) AS mean_studytime,
        AVG(failures) AS mean_failures,
        AVG(schoolsup) AS mean_schoolsup,
