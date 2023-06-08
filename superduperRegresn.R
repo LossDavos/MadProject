@@ -11,6 +11,14 @@ for (i in colnames(students)){
 # students[['Dalc']] = 5 - students[['Dalc']] 
 # students[['goout']] = 5 - students[['goout']] 
 
+
+age_counts <- students %>%
+  group_by(age) %>%
+  summarize(count = n())
+
+
+
+
 fit <- lm(G3 ~ G1 + G2, data = students) #First simple regression model
 summary(fit)
 library(scatterplot3d)
@@ -58,7 +66,8 @@ for (i in names(t_test_results)) {
 }
 #males are smarter
 p<-ggplot(students, aes(x=sex, y=G3, fill=sex)) +
-  geom_boxplot() + ggtitle("Results of boys and girls") + theme(plot.title = element_text(hjust = 0.5))
+  geom_boxplot() + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c('#e76f51','#33658a'))+  theme_classic()
+
 p
 # max <- 0
 # fit_lm_model <- function(variables, w){
@@ -93,8 +102,8 @@ p
 # }
 #plot the correlation matrix
 library(corrplot)
-R <- cor(students[,c(7,8,14:19, 21, 24:33)])
-corrplot.mixed(R, lower = "number", lower.col = "black", upper = "ellipse", tl.pos="lt")
+R <- cor(students[,c(8,9,15:20, 21, 24:33,1)])
+corrplot.mixed(R, lower = "number", lower.col = "black", upper = "ellipse", tl.pos="lt", tl.col = 'gray')
 
 
 
@@ -141,12 +150,22 @@ summary_worst_non_0 <- colMeans(worst_non_0[c(1,8,9,14:33)])
 print(summary_top > summary_all)
 
 library(ggplot2) #dependence of Medu and Fedu on G3 in graph
+library(dplyr)
+
+avg_G3 <- students %>%
+  group_by(Medu, Fedu) %>%
+  summarise(avg_G3 = mean(G3), group_size = n())
 my_graph <- ggplot(students, aes(x = Fedu, y = Medu)) +
-  geom_point(aes(color = G3)) +
-  stat_smooth(method = "lm",
-              col = "#C42126",
-              se = FALSE,
-              )+ggtitle("Impact of parents' education") + theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_point(aes(color = avg_G3, size = group_size), data = avg_G3) +
+  geom_text(data = avg_G3, aes(label = round(avg_G3, 1)), color = "black", size = 3, nudge_y = 0.1)+ labs(x = "Father's Education", y = "Mother's Education", color = "Average of G3 \n(Above the dot)", size = "Size of the group")
+
+ggplot(data = students, aes(x = famsize, y = G3)) +
+  scale_color_gradient(low = "yellow", high = "darkorange") +
+  geom_text(data = avg_G3, aes(label = group_size), size = 3, vjust = -1) +
+
+g1
+
 my_graph
 
 freq <- as.data.frame(table(students$G3, students$famsize))
@@ -162,12 +181,12 @@ students <- merge(students, freq, by = c("G3", "famsize"))
 
 # Graph if size of family matters
 ggplot(data = students, aes(x = famsize, y = G3, col = Frequency)) +
-  geom_point(size = 7) + ggtitle("Students' results divided by number of members in their families") + theme(plot.title = element_text(hjust = 0.5))-> g1
+  geom_point(size = 7) + theme(plot.title = element_text(hjust = 0.5)) + scale_color_gradient(low = "#FAC213", high = "red") +  theme_classic()-> g1
 
 
 
 #looking for ci su znamky normalne rozdelene
-ggplot(data=students, aes(x=G3))+ geom_bar(fill="blue")+ ggtitle("Frequencies of the grades") + theme(plot.title = element_text(hjust = 0.5))
+ggplot(data=students, aes(x=G3))+ geom_bar(fill="#e76f51")+ theme(plot.title = element_text(hjust = 0.5)) +  theme_classic()
 
 
 write.csv(students, "students.csv")
