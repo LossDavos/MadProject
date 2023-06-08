@@ -625,7 +625,7 @@
   // Array with results
   var results = {
     {% for pr in info_cat %}
-    "{{pr[0]}}":["{{pr[1]}}", "{{pr[2]}}", {{pr[3]}}, {{pr[4]}}, {{pr[5]}}],
+    "{{pr[0]|safe}}":["{{pr[1]}}", "{{pr[2]}}", {{pr[3]}}, {{pr[4]}}, {{pr[6]}}],
     {% endfor %}
   };
 
@@ -647,8 +647,8 @@
       var g2avg = results[key][3];
       var pval = results[key][4];
       var result = "";
-      if(Math.abs(pval) > .5){
-        result = `<b>Yes!</b> The <b>p-value ${pval}</b> is high enough. Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
+      if(Math.abs(pval) < .05){
+        result = `<h3><b>Yes!</b> The <b>p-value ${pval}</b> is significant.</h3> <br>Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
         <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
         g1.className = "";
         g1.className = "";
@@ -664,7 +664,7 @@
         g2.classList.add("btn-success");
         document.getElementById("result").className = "";
         document.getElementById("result").classList.add("mt-2");
-        document.getElementById("result").classList.add("p-2");
+        document.getElementById("result").classList.add("py-2");
 
 
         document.getElementById("result").classList.add("rounded");
@@ -677,7 +677,7 @@
 
       }
       else{
-        result = `<b>No!</b> The <b>p-value ${pval}</b> is not considered significant. Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
+        result = `<h3><b>No!</b> The <b>p-value ${pval}</b> is not considered significant.</h3> <br>Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
         <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
         g1.className = "";
         g2.className = "";
