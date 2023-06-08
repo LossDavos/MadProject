@@ -16,9 +16,6 @@ age_counts <- students %>%
   group_by(age) %>%
   summarize(count = n())
 
-
-
-
 fit <- lm(G3 ~ G1 + G2, data = students) #First simple regression model
 summary(fit)
 library(scatterplot3d)
@@ -37,13 +34,6 @@ fit2 <- lm(students$G3 ~  students$G1+students$G2 +students$romantic+students$st
            students$Dalc+ students$Walc, data=students) #second model using more variables, a little higher score
 summary(fit2)
 
-# david_is_dummy <- dummy_cols(students, select_columns = c('Medu', 'Fedu'))
-# 
-# #fit <- lm(david_is_dummy$G3 ~ david_is_dummy$Medu_1 + david_is_dummy$Medu_2 + david_is_dummy$Medu_3+ david_is_dummy$Medu_4 +
-# #            david_is_dummy$Fedu_1 + david_is_dummy$Fedu_2 + david_is_dummy$Fedu_3 + david_is_dummy$Fedu_4
-# #            , data=david_is_dummy)
-# fit <- lm(david_is_dummy$G3 ~ david_is_dummy$absences
-#             , data=david_is_dummy)
 t_test_results <- list()
 cols_binary <-c("sex", "famsize", "school",  "Pstatus",  "address" ,   "schoolsup",  "famsup",     "paid",       "activities", "nursery",    "higher",     "internet",   "romantic") #binary variables, which can be easily divided into two groups in t-testing
 cols_categorical <- c("Medu", "Fedu","studytime",  "failures", "famrel",    
@@ -64,43 +54,11 @@ for (i in names(t_test_results)) {
   print(i)  # Print the name of the element
   print(t_test_results[[i]])  # Print the element itself
 }
-#males are smarter
+#males and females
 p<-ggplot(students, aes(x=sex, y=G3, fill=sex)) +
   geom_boxplot() + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c('#e76f51','#33658a'))+  theme_classic()
 
 p
-# max <- 0
-# fit_lm_model <- function(variables, w){
-#   composite_variable <- rep(0,395)
-#   for (i in 1:length(variables)){
-#     composite_variable <- composite_variable + students[[variables[i]]] * w[i]
-#   }
-#   fitted <- lm(G3 ~ composite_variable
-#               , data=students)
-#   rsq <- summary(fitted)$r.squared
-#   if (rsq > max){
-#     print(rsq)
-#     max <<- rsq
-#   }
-#   if ( rsq > 0.3){
-#   print(fitted$r.squared)
-#     print(variables)
-#     print(weights)
-#   }
-# 
-#   t <- fitted$coef
-#   
-#   # plot(composite_variable, students$G3, pch=20)
-#   # abline(coef=t, col="blue", lwd=2)
-# }
-# possible <-  c( "schoolsup",  "famsup",     "paid",  "higher",   
-#                "Medu", "Fedu","studytime", "famrel",    
-#                "freetime", "goout" ,     "Dalc"  ,     "Walc"      , "health")
-# for (i in 1:100000){
-#   si <-  sample(5:10, 1)
-# fit_lm_model(sample(possible,si), sample(1:100, si)/10)
-# }
-#plot the correlation matrix
 library(corrplot)
 R <- cor(students[,c(8,9,15:20, 21, 24:33,1)])
 corrplot.mixed(R, lower = "number", lower.col = "black", upper = "ellipse", tl.pos="lt", tl.col = 'gray')
@@ -115,6 +73,8 @@ subset_data <- students[, c( "sex", "Medu", "Fedu",
                              "studytime", "failures",
                             "schoolsup", "famsup", "paid", "higher",
                             "romantic", "famrel", "goout", "Dalc", "Walc", "absences","G2", "G1","G3")]
+
+
 
 # Fit a logistic regression model
 logistic_model <- glm(G3>=10 ~ ., data = subset_data, family = "binomial")
@@ -158,15 +118,14 @@ avg_G3 <- students %>%
 my_graph <- ggplot(students, aes(x = Fedu, y = Medu)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   geom_point(aes(color = avg_G3, size = group_size), data = avg_G3) +
-  geom_text(data = avg_G3, aes(label = round(avg_G3, 1)), color = "black", size = 3, nudge_y = 0.1)+ labs(x = "Father's Education", y = "Mother's Education", color = "Average of G3 \n(Above the dot)", size = "Size of the group")
-
-ggplot(data = students, aes(x = famsize, y = G3)) +
-  scale_color_gradient(low = "yellow", high = "darkorange") +
-  geom_text(data = avg_G3, aes(label = group_size), size = 3, vjust = -1) +
-
-g1
-
+  geom_text(data = avg_G3, aes(label = round(avg_G3, 1)), color = "black", size = 3, nudge_y = 0.1)+ labs(x = "Father's Education", y = "Mother's Education", color = "Average of G3 \n(Above the dot)", size = "Size of the group")+ theme_bw()
 my_graph
+
+# ggplot(data = students, aes(x = famsize, y = G3)) +
+#   scale_color_gradient(low = "yellow", high = "darkorange") +
+#   geom_text(data = avg_G3, aes(label = group_size), size = 3, vjust = -1) 
+# 
+# 
 
 freq <- as.data.frame(table(students$G3, students$famsize))
 colnames(freq) <- c("G3", "famsize", "Frequency")
@@ -188,10 +147,6 @@ ggplot(data = students, aes(x = famsize, y = G3, col = Frequency)) +
 #looking for ci su znamky normalne rozdelene
 ggplot(data=students, aes(x=G3))+ geom_bar(fill="#e76f51")+ theme(plot.title = element_text(hjust = 0.5)) +  theme_classic()
 
-
-write.csv(students, "students.csv")
-
-
 results_df <- data.frame(stringsAsFactors = FALSE)
 
 # Iterate over each t-test result
@@ -207,6 +162,7 @@ for (test_name in names(t_test_results)) {
   if (identical(group_names,c("mean in group 0", "mean in group 1"))){
     group_names <- c("mean in group FALSE", "mean in group TRUE")
   }
+}
   
   # Add the information to the data frame
   results_df <- rbind(results_df, data.frame(Test = test_name,
@@ -217,7 +173,6 @@ for (test_name in names(t_test_results)) {
                                              Estimate2 = test_estimate[2],
                                              Statistic = test_statistic,
                                              stringsAsFactors = FALSE))
-}
 
 # Remove the empty row
 
