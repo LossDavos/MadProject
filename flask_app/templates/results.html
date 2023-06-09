@@ -2,7 +2,7 @@
 
 {% block results %}
 
-  <main id="main">
+<main id="main">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <!-- PIE CHARTS-->
   <script type="text/javascript">
@@ -83,14 +83,14 @@
   {% endfor %}
   ]);
   var worst = new Map([
-   {% for point in najhorsi_nie_0 %}
+    {% for point in najhorsi_nie_0 %}
     ["{{options[loop.index0]}}", {{ point }}],
   {% endfor %}
   ]);
     google.charts.load('current', { 'packages': ['corechart'] });
 
     function generateChart() {
-     var selectedValue = document.getElementById("selectOption").value;
+      var selectedValue = document.getElementById("selectOption").value;
     var topValue = topka.get(selectedValue);
     var allValue = vsetci.get(selectedValue);
     var worst0Value = worst0.get(selectedValue);
@@ -236,7 +236,7 @@
           <div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="500">
             <a href="#Regression">
               <div class="icon-box">
-                <div class="icon"><<i class='bx bxs-network-chart' ></i></div>
+                <div class="icon"><i class='bx bxs-network-chart' ></i></div>
                 <h4 class="title"><a href="">Regression</a></h4>
                 <p class="description">Correlation matrix and pointing out some considerable results. Using that information
                   with R we tried to make a linear model but since that is not completely suitable we also made a logistic regression.
@@ -305,7 +305,6 @@
   </section>
   <!-- END CATEGORIES AND THEIR STATISTICS-->
 
-
   <!-- GENERAL STATISTICS-->
   <section id="GeneralStatisticsGraphs" class="services pb-0">
     <div class="container">
@@ -318,7 +317,7 @@
             
           </div>
           <div class="row about team py-0">
-           
+            
             <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="100">
               <i class='bx bx-analyse' style="position: relative;z-index: 1;"></i>
               <h4 style="position: relative;z-index: 1;">Distribution of marks</h4>
@@ -336,7 +335,7 @@
           </div>
 
           <div class="row about team py-0">
-           
+            
             <div class="col-6 justify-content-center" data-aos="fade-up" data-aos-delay="300">
               <i class='bx bx-body' style="position: relative;z-index: 1;"></i>
               <h4 style="position: relative;z-index: 1;">Age Distribution</h4>
@@ -353,10 +352,9 @@
               <div id="chart3" class="chart col-12" style="width: 1100px; height: 500px;  margin-top:-50px;"  data-aos="zoom-in" data-aos-delay="400"></div>
             </div>
           </div>
-         
+          
         </div>
       </div>
-
     </div>
   </section>
   <!-- END GENERAL STATISTICS -->
@@ -364,7 +362,6 @@
   <!-- MEANS(BAR PLOT)-->
   <section id="BarPlotMeans" class="about section-bg">
     <div class="container">
-
       <div class="row justify-content-between pb-5">
         <div class="col-lg-6 pt-5 pt-lg-0 border-right" data-aos="fade-up">
           <h3 data-aos="fade-up">Comparing the best and the worst</h3>
@@ -433,7 +430,7 @@
           <h3 data-aos="fade-up">Oh-oh, that's what makes you succesful!</h3>
           <p data-aos="fade-up" data-aos-delay="100">
             Probably the most natural question that comes to our minds when talking about school results is whether there are some indicators that impact 
-            students' marks whether negatively or positively and if so, how significant the impact is. We took a look at the following three:
+            students' marks whether negatively or positively and if so, how significant the impact is. We analysed the following three:
           </p>
         </div>
         <div class="row about team mt-4 pt-0 text-center justify-content-center">
@@ -460,7 +457,7 @@
                 <div class="member-info-content text-right pe-2">
                   <h4>Impact on family size on academical results</h4>
                   <span>The dots are coloured by the fraction (number of students with that amount of points from one of the groups divided by the size of the groups).
-                     Seeing that the colors are distributed the same way on both left and right we might say that the size of the family doesn't bring a crucial impact on the grades.
+                      Seeing that the colors are distributed the same way on both left and right we might say that the size of the family doesn't bring a crucial impact on the grades.
                   </span>
                 </div>
               </div>
@@ -490,7 +487,7 @@
   </section>
   <!-- END WHAT MAKES YOU SUCCESSFUL-->
 
- <!-- HYPOTHESES -->
+  <!-- HYPOTHESES -->
   <section id="Hypotheses" class="services section-bg" style="position: relative; z-index: 10;">
     <div class="container">
       <div class="row justify-content-center about">
@@ -600,7 +597,7 @@
           <h3 data-aos="fade-up">Linear model</h3>
           <p data-aos="fade-up" data-aos-delay="100">
             We know that G3 is discrete variable ranging from 0 to 20, so the linear regression might not be the best way of predicting results,
-             but in the following we will use logistic regression as well. We are also right to think that the observation are independent of
+              but in the following we will use logistic regression as well. We are also right to think that the observation are independent of
               each other. 
 
           </p>
@@ -613,7 +610,7 @@
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
               <i class='bx bx-alarm-exclamation'></i>
               <h4>Is not suitable</h4>
-               <p>This model is not suitable for discrete data, so we should be careful with interpreting the results.</p>
+                <p>This model is not suitable for discrete data, so we should be careful with interpreting the results.</p>
             </div>
           </div>
         </div>
@@ -627,20 +624,24 @@
             Under the assumption that between the variables there are linear relationships. 
           </p>
           <div class="row">
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <i class='bx bx-check-shield' ></i>
-              <h4> The most important variable in passing the test turned out to be the scores from G1 and G2 and the quality of family relationships. Negative impact has going out with friends.
-</h4>
-              <!-- <p>Very serious important matter indeed is being discussed</p> -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+              <i class='bx bx-trending-up' ></i>
+              <h4> Positive impact</h4>
+              <p>The most important variable in passing the test turned out to be the scores from G1 and G2 and the quality of family relationships.</p>
             </div>
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+              <i class='bx bx-trending-down' ></i>
+              <h4>Negative impact</h4>
+              <p> is going out with friends. Hooray nerds!</p>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
               <i class='bx bx-check'></i>
               <h4>Suitable</h4>
-              <p>Good for looking for the importance of the given variables</p>
+              <p>Good for looking for the importance of the given variables.</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 about-img " data-aos="fade-up" data-aos-delay="400">
+        <div class="col-lg-6 about-img " data-aos="fade-up" data-aos-delay="100">
           <img src={{url_for('static', filename="assets/img/lireg.png" )}} class="img-fluid d-flex mx-auto" style="height:60%; " alt="" data-aos="zoom-in">
         </div>
       </div>
@@ -663,7 +664,7 @@
   </script>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  
+    
   <script type="text/javascript">
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart);
@@ -705,100 +706,100 @@
     }
   </script>
 
-<script>
-  // Array with results
-  var results = {
-    {% for pr in info_cat %}
-    "{{pr[0]|safe}}":["{{pr[1]}}", "{{pr[2]}}", {{pr[3]}}, {{pr[4]}}, {{pr[6]}}],
-    {% endfor %}
-  };
+  <script>
+    // Array with results
+    var results = {
+      {% for pr in info_cat %}
+      "{{pr[0]|safe}}":["{{pr[1]}}", "{{pr[2]}}", {{pr[3]}}, {{pr[4]}}, {{pr[6]}}],
+      {% endfor %}
+    };
 
-  function showResult() {
-      // Get the selected values from the dropdown menus
-      var cat = document.getElementById("cat");
-      var g1 = document.getElementById("g1");
-      var g2 = document.getElementById("g2");
+    function showResult() {
+        // Get the selected values from the dropdown menus
+        var cat = document.getElementById("cat");
+        var g1 = document.getElementById("g1");
+        var g2 = document.getElementById("g2");
 
-      // Create the key to access the result in the results array
-      var key = cat.text;
-      var g1name = results[key][0];
-      var g2name = results[key][1];
+        // Create the key to access the result in the results array
+        var key = cat.text;
+        var g1name = results[key][0];
+        var g2name = results[key][1];
 
-      g1.text = g1name;
-      g2.text = g2name;
+        g1.text = g1name;
+        g2.text = g2name;
 
-      var g1avg = results[key][2];
-      var g2avg = results[key][3];
-      var pval = results[key][4];
-      var result = "";
-      if(Math.abs(pval) < .05){
-        result = `<h3><b>Yes!</b> The <b>p-value ${pval}</b> is significant.</h3> <br>Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
-        <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
-        g1.className = "";
-        g1.className = "";
-        g2.className = "";
-        cat.className = "";
-        cat.classList.add("btn");
-        cat.classList.add("btn-success");
-        cat.classList.add("dropdown-toggle");
+        var g1avg = results[key][2];
+        var g2avg = results[key][3];
+        var pval = results[key][4];
+        var result = "";
+        if(Math.abs(pval) < .05){
+          result = `<h3><b>Yes!</b> The <b>p-value ${pval}</b> is significant.</h3> <br>Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
+          <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
+          g1.className = "";
+          g1.className = "";
+          g2.className = "";
+          cat.className = "";
+          cat.classList.add("btn");
+          cat.classList.add("btn-success");
+          cat.classList.add("dropdown-toggle");
 
-        g1.classList.add("btn");
-        g1.classList.add("btn-success");
-        g2.classList.add("btn");
-        g2.classList.add("btn-success");
-        document.getElementById("result").className = "";
-        document.getElementById("result").classList.add("mt-2");
-        document.getElementById("result").classList.add("py-2");
-
-
-        document.getElementById("result").classList.add("rounded");
-
-        document.getElementById("result").classList.add("border"); 
-        document.getElementById("result").classList.add("border-success");
-        document.getElementById("result").classList.add("text-success");
-        document.getElementById("result").classList.add("text-center");
+          g1.classList.add("btn");
+          g1.classList.add("btn-success");
+          g2.classList.add("btn");
+          g2.classList.add("btn-success");
+          document.getElementById("result").className = "";
+          document.getElementById("result").classList.add("mt-2");
+          document.getElementById("result").classList.add("py-2");
 
 
+          document.getElementById("result").classList.add("rounded");
+
+          document.getElementById("result").classList.add("border"); 
+          document.getElementById("result").classList.add("border-success");
+          document.getElementById("result").classList.add("text-success");
+          document.getElementById("result").classList.add("text-center");
+
+
+        }
+        else{
+          result = `<h3><b>No!</b> The <b>p-value ${pval}</b> is not considered significant.</h3> <br>Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
+          <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
+          g1.className = "";
+          g2.className = "";
+          cat.className = "";
+          cat.classList.add("btn");
+          cat.classList.add("btn-danger");
+          cat.classList.add("dropdown-toggle");
+          g1.classList.add("btn");
+          g1.classList.add("btn-danger");
+          g2.classList.add("btn");
+          g2.classList.add("btn-danger");
+          document.getElementById("result").className = "";
+          document.getElementById("result").classList.add("mt-2");
+          document.getElementById("result").classList.add("p-2");
+
+
+          document.getElementById("result").classList.add("rounded");
+
+          document.getElementById("result").classList.add("border"); 
+          document.getElementById("result").classList.add("border-danger");
+          document.getElementById("result").classList.add("text-danger");
+          document.getElementById("result").classList.add("text-center");
+
+        }
+
+        document.getElementById("result").innerHTML = result;
       }
-      else{
-        result = `<h3><b>No!</b> The <b>p-value ${pval}</b> is not considered significant.</h3> <br>Additionally, the average in the group <b>"${g1name}"</b> the average value is <b>${g1avg}</b>, whereas in the second group
-        <b>"${g2name}"</b> the average is <b>${g2avg}</b>.`;
-        g1.className = "";
-        g2.className = "";
-        cat.className = "";
-        cat.classList.add("btn");
-        cat.classList.add("btn-danger");
-        cat.classList.add("dropdown-toggle");
-        g1.classList.add("btn");
-        g1.classList.add("btn-danger");
-        g2.classList.add("btn");
-        g2.classList.add("btn-danger");
-        document.getElementById("result").className = "";
-        document.getElementById("result").classList.add("mt-2");
-        document.getElementById("result").classList.add("p-2");
+      
+      // Function to update the result automatically when both dropdowns are selected
+      function updateResult(w,elem) {
+        document.getElementById(w).text = elem.text;
+        var cat = document.getElementById("cat");
 
-
-        document.getElementById("result").classList.add("rounded");
-
-        document.getElementById("result").classList.add("border"); 
-        document.getElementById("result").classList.add("border-danger");
-        document.getElementById("result").classList.add("text-danger");
-        document.getElementById("result").classList.add("text-center");
-
+        if (cat.text !== "") {
+          showResult();
+        }
       }
-
-      document.getElementById("result").innerHTML = result;
-    }
-    
-    // Function to update the result automatically when both dropdowns are selected
-    function updateResult(w,elem) {
-      document.getElementById(w).text = elem.text;
-      var cat = document.getElementById("cat");
-
-      if (cat.text !== "") {
-        showResult();
-      }
-    }
-</script>
+  </script>
 </main><!-- End #main -->
 {% endblock %}
