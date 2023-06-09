@@ -2,158 +2,151 @@
 
 {% block home %}
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
 
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+        <h1>Analysis and visualisation of various impact on students academical results</h1>
+        <h2>This is our final project for Data Management class.</h2>
+        <div>
+          <a href="{{url_for('results')}}" class="btn-get-started scrollto">Check out our results</a>
+        </div>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2 hero-img">
+        <img src={{url_for('static', filename="assets/img/brain.png" )}} class="img-fluid animated" alt="">
+      </div>
+    </div>
+  </div>
+
+</section><!-- End Hero -->
+
+<main id="main">
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
     <div class="container">
-      <div class="row gy-4">
-        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Analysis and visualisation of various impact on students academical results</h1>
-          <h2>This is our final project for Data Management class.</h2>
-          <div>
-            <a href="{{url_for('results')}}" class="btn-get-started scrollto">Check out our results</a>
+
+      <div class="row justify-content-between">
+        <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
+          <img src={{url_for('static', filename="assets/img/about-img.svg" )}} class="img-fluid" alt="" data-aos="zoom-in">
+        </div>
+        <div class="col-lg-6 pt-5 pt-lg-0">
+          <h3 data-aos="fade-up">Choosing the dataset</h3>
+          <p data-aos="fade-up" data-aos-delay="100">
+            Our aim was to study the factors that help or worsen students grades so we wanted our dataset to contain as much 
+            relevant information about the students as possible. And that is how we found the one on <a href="https://www.kaggle.com/datasets/dipam7/student-grade-prediction">kaggle</a>
+          </p>
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <i class='bx bx-expand' ></i>
+              <h4>Size</h4>
+              <p>It is worth mentioning that the dataset is not large enough to consider the results generally relevant</p>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <i class='bx bxs-grid' ></i>
+              <h4>Variety of categories</h4>
+              <p>This one had the largest numbers of different categories out of the ones we were choosing from.</p>
+            </div>
           </div>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img">
-          <img src={{url_for('static', filename="assets/img/brain.png" )}} class="img-fluid animated" alt="">
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+  <!-- ======= Sacrifice Section ======= -->
+  <section id="services" class="services section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Tools</h2>
+        <p>Some tools we used to make this work</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><i class='bx bxs-registered' ></i></i></div>
+            <h4 class="title"><a href="">R studio</a></h4>
+            <p class="description">Whole data analysis was done using the R language along with plotting graphs using some special R's libraries</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><i class='bx bxl-google' ></i></i></div>
+            <h4 class="title"><a href="">Google charts</a></h4>
+            <p class="description">To bring more user experience we also plotted some graphs using Google charts and Javascript</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class='bx bxl-python' ></i></i></div>
+            <h4 class="title"><a href="">Python</a></h4>
+            <p class="description">For more sophisticated graphs we also used Pythons' plotly and pandas library</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
+          <div class="icon-box">
+            <div class="icon"><i class='bx bxs-data' ></i></i></div>
+            <h4 class="title"><a href="">SQLite3</a></h4>
+            <p class="description">Our processed data or results are stored in sqlite3 dabase which allows faster interactions</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
+
+  <!-- ======= Team Section ======= -->
+  <section id="team" class="team">
+    <div class="container">
+
+      <div class="section-title" data-aos="fade-up">
+        <h2>Team</h2>
+        <p>Team members</p>
+      </div>
+
+      <div class="row justify-content-center">
+
+        <div class="col-xl-3 col-lg-4 col-md-6 " data-aos="zoom-in" data-aos-delay="100">
+          <div class="member">
+            <img src={{url_for('static', filename="assets/img/team/david.png" )}} class="img-fluid" alt="" style="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4 style="color:white">David Stevanak</h4>
+              </div>
+              <div class="social">
+                <a href="https://github.com/LossDavos"><i class='bx bxl-github' ></i></a>
+                <a href="https://www.facebook.com/david.stevanak27"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.instagram.com/at_davos/"><i class="bi bi-facebook"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="member">
+            <img src={{url_for('static', filename="assets/img/team/andro.jpeg" )}} class="img-fluid" alt="" style="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4  style="color:white">Andrej Cernansky</h4>
+              </div>
+              <div class="social">
+                <a href="https://github.com/cernansky16"><i class='bx bxl-github' ></i></a>
+                <a href="https://www.instagram.com/andrej_cernansky/"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/andro.cernansky"><i class="bi bi-facebook"></i></a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </section><!-- End Team Section -->
 
-  </section><!-- End Hero -->
-
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="row justify-content-between">
-          <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-            <img src={{url_for('static', filename="assets/img/about-img.svg" )}} class="img-fluid" alt="" data-aos="zoom-in">
-          </div>
-          <div class="col-lg-6 pt-5 pt-lg-0">
-            <h3 data-aos="fade-up">Choosing the dataset</h3>
-            <p data-aos="fade-up" data-aos-delay="100">
-              Our aim was to study the factors that help or worsen students grades so we wanted our dataset to contain as much 
-              relevant information about the students as possible. And that is how we found the one on <a href="https://www.kaggle.com/datasets/dipam7/student-grade-prediction">kaggle</a>
-            </p>
-            <div class="row">
-              <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <i class='bx bx-expand' ></i>
-                <h4>Size</h4>
-                <p>It is worth mentioning that the dataset is not large enough to consider the results generally relevant</p>
-              </div>
-              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <i class='bx bxs-grid' ></i>
-                <h4>Variety of categories</h4>
-                <p>This one had the largest numbers of different categories out of the ones we were choosing from.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Sacrifice Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Tools</h2>
-          <p>Some tools we used to make this work</p>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class='bx bxs-registered' ></i></i></div>
-              <h4 class="title"><a href="">R studio</a></h4>
-              <p class="description">Whole data analysis was done using the R language along with plotting graphs using some special R's libraries</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class='bx bxl-google' ></i></i></div>
-              <h4 class="title"><a href="">Google charts</a></h4>
-              <p class="description">To bring more user experience we also plotted some graphs using Google charts and Javascript</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class='bx bxl-python' ></i></i></div>
-              <h4 class="title"><a href="">Python</a></h4>
-              <p class="description">For more sophisticated graphs we also used Pythons' plotly and pandas library</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class='bx bxs-data' ></i></i></div>
-              <h4 class="title"><a href="">SQLite3</a></h4>
-              <p class="description">Our processed data or results are stored in sqlite3 dabase which allows faster interactions</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Team</h2>
-          <p>Team members</p>
-        </div>
-
-        <div class="row justify-content-center">
-
-          <div class="col-xl-3 col-lg-4 col-md-6 " data-aos="zoom-in" data-aos-delay="100">
-            <div class="member">
-              <img src={{url_for('static', filename="assets/img/team/david.jpg" )}} class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4 style="color:white">David Stevanak</h4>
-                </div>
-                <div class="social">
-                  <a href="https://github.com/LossDavos"><i class='bx bxl-github' ></i></a>
-                  <a href="https://www.facebook.com/david.stevanak27"><i class="bi bi-instagram"></i></a>
-                  <a href="https://www.instagram.com/at_davos/"><i class="bi bi-facebook"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="member">
-              <img src={{url_for('static', filename="assets/img/team/andro.jpeg" )}} class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4  style="color:white">Andrej Cernansky</h4>
-                </div>
-                <div class="social">
-                  <a href="https://github.com/cernansky16"><i class='bx bxl-github' ></i></a>
-                  <a href="https://www.instagram.com/andrej_cernansky/"><i class="bi bi-instagram"></i></a>
-                  <a href="https://www.facebook.com/andro.cernansky"><i class="bi bi-facebook"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-         
-
-        </div>
-
-      </div>
-    </section><!-- End Team Section -->
-
-  
-  </main><!-- End #main -->
-
-  {% endblock %}
+</main><!-- End #main -->
+{% endblock %}

@@ -52,15 +52,12 @@
 
       <div class="logo">
         <h1 class="text-light"><a href="index.html"><span>Data Management project</span></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src={{url_for('static', filename="assets/img/logo.png" )}} alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="{{url_for('home')}}">Home</a></li>
           <li><a class="nav-link scrollto" href="{{url_for('home')}}#about">About Us</a></li>
-          <li><a class="getstarted scrollto" href="{{ url_for('tyi')}}">Try it yourself</a></li>
           <li><a class="nav-link scrollto" href="{{url_for('home')}}#team">Team</a></li>
           <li class="dropdown"><a href="{{url_for('results')}}"><span>Our results</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -91,8 +88,6 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer"  style="background-color: white;">
-
-
     <div class="container py-4">
       <div class="copyright">
         &copy; Copyright <strong><span>AnDa</span></strong>. All Rights Reserved
@@ -112,14 +107,10 @@
   <!-- Vendor JS Files -->
 
   <script src={{url_for('static', filename="assets/vendor/aos/aos.js")}}></script>
-  <!-- <script src={{url_for('static', filename="assets/vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script> -->
   <script src={{url_for('static', filename="assets/vendor/glightbox/js/glightbox.min.js")}}></script>
   <script src={{url_for('static', filename="assets/vendor/isotope-layout/isotope.pkgd.min.js")}}></script>
   <script src={{url_for('static', filename="assets/vendor/swiper/swiper-bundle.min.js")}}></script>
   <script src={{url_for('static', filename="assets/vendor/php-email-form/validate.js")}}></script>
-
-
-
 
   <!-- Template Main JS File -->
   <script src={{url_for('static', filename="assets/js/main.js")}}></script>
