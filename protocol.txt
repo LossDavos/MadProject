@@ -1,5 +1,25 @@
-Commands used:
+Protocol from MAD final project - Andrej Čerňanský & David Šťevaňák
+
+Submitted files:
+
+dataAnalysisMAD.R
+application.py
+students.db
+html templates :
+home.html  layout.html      results.html
+portfolio-details.html 
+static/assets - graphs, css, js ...
+
+List of Commands used:
 -------------
+
+command used to launch flask application:
+cd flask_app
+export FLASK_APP=application.py
+export FLASK_ENV=development 
+flask run --port=PORT where PORT is your 4 digit special number
+
+Commands used for Data Analysis in R:
 Linear regression
 fit <- lm(G3 ~ G1 + G2, data = students) 
 #getting coefficients
@@ -43,3 +63,12 @@ con <- dbConnect(SQLite(), "students.db")
 dbWriteTable(con, "student_data", students, overwrite = TRUE)
 dbWriteTable(con, "t_tests", results_df, overwrite = TRUE)
 dbDisconnect(con)
+
+List of resources:
+#Javascript charts
+https://developers.google.com/chart/interactive/docs/gallery
+#R
+https://www.datanovia.com/en/blog/ggplot-theme-background-color-and-grids/
+https://towardsdatascience.com/simply-explained-logistic-regression-with-example-in-r-b919acb1d6b3
+#bootstrap
+https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/download/
