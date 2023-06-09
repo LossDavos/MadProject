@@ -72,3 +72,6 @@ https://www.datanovia.com/en/blog/ggplot-theme-background-color-and-grids/
 https://towardsdatascience.com/simply-explained-logistic-regression-with-example-in-r-b919acb1d6b3
 #bootstrap
 https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/download/
+pictures and icons
+https://boxicons.com/?query=down
+https://www.pngegg.com/
